@@ -1,0 +1,198 @@
+[
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\font_bold_primetime.ttf.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\font\\bold_primetime.ttf"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\drawable_logo.png.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\drawable\\logo.png"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\raw_revive.mp3.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\raw\\revive.mp3"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\drawable_avd_splash_screen.xml.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\drawable\\avd_splash_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\raw_invalid.mp3.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\raw\\invalid.mp3"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\raw_button_click.mp3.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\raw\\button_click.mp3"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\raw_combo.mp3.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\raw\\combo.mp3"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\raw_game_over.mp3.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\raw\\game_over.mp3"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\raw_cross_blast.mp3.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\raw\\cross_blast.mp3"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\raw_blast.mp3.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\raw\\blast.mp3"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\drawable_ic_splash.xml.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\drawable\\ic_splash.xml"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\font_boldonse.ttf.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\font\\boldonse.ttf"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-mdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-mdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\raw_block_place.mp3.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\raw\\block_place.mp3"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-hdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\raw_perfect_clear.mp3.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\raw\\perfect_clear.mp3"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.rpn.blockblaster.app-debug-72:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.rpn.blockblaster.app-main-74:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-debug-72:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\abdul\\.gradle\\daemon\\9.3.1\\com.rpn.blockblaster.app-main-74:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    }
+]

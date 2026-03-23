@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="256dp"
+            android:height="256dp"
+            android:viewportHeight="1024"
+            android:viewportWidth="1024">
+
+            <group
+                android:name="board_frame"
+                android:pivotX="512"
+                android:pivotY="512">
+                <path
+                    android:fillColor="#E0E0E0"
+                    android:pathData="M300,300 h424 v424 h-424 z M310,310 v404 h404 v-404 z" />
+
+                <group android:name="existing_blocks">
+                    <path
+                        android:name="block_1"
+                        android:fillColor="#FF4136"
+                        android:pathData="M320,620 l0,84 l84,0 l0,-84 z" /> <path
+                    android:name="block_2"
+                    android:fillColor="#2ECC40"
+                    android:pathData="M420,620 l0,84 l84,0 l0,-84 z" /> <path
+                    android:name="block_3"
+                    android:fillColor="#FFDC00"
+                    android:pathData="M520,620 l0,84 l84,0 l0,-84 z" /> <path
+                    android:name="block_4"
+                    android:fillColor="#0074D9"
+                    android:pathData="M620,620 l0,84 l84,0 l0,-84 z" /> <path
+                    android:name="block_5"
+                    android:fillColor="#FF4136"
+                    android:pathData="M320,520 l0,84 l84,0 l0,-84 z" /> <path
+                    android:name="block_6"
+                    android:fillColor="#FFDC00"
+                    android:pathData="M620,520 l0,84 l84,0 l0,-84 z" /> </group>
+            </group>
+
+            <group
+                android:name="falling_block_group"
+                android:pivotX="512"
+                android:pivotY="310"
+                android:translateY="0"> <path
+                android:name="falling_block_blue"
+                android:fillColor="#0074D9"
+                android:alpha="1"
+                android:pathData="M468,100 l0,88 l88,0 l0,-88 z" /> </group>
+
+            <group
+                android:name="burst_group"
+                android:pivotX="512"
+                android:pivotY="360"
+                android:scaleX="0.1"
+                android:scaleY="0.1"
+                android:alpha="0">
+                <path
+                    android:name="starburst"
+                    android:fillColor="#FFFFFF"
+                    android:pathData="M512,310 l10,30 l30,10 l-30,10 l-10,30 l-10,-30 l-30,-10 l30,-10 z" />
+            </group>
+        </vector>
+    </aapt:attr>
+
+    <target android:name="falling_block_group">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="1200"
+                    android:propertyName="translateY"
+                    android:valueFrom="0"
+                    android:valueTo="210"
+                    android:interpolator="@android:anim/accelerate_interpolator" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="falling_block_blue">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="100"
+                    android:startOffset="1200"
+                    android:propertyName="alpha"
+                    android:valueFrom="1"
+                    android:valueTo="0" />
+            </set>
+        </aapt:attr>
+    </target>
+
+
+    <target android:name="burst_group">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="100"
+                    android:startOffset="1200"
+                    android:propertyName="alpha"
+                    android:valueFrom="0"
+                    android:valueTo="1" />
+                <objectAnimator
+                    android:duration="800"
+                    android:startOffset="1200"
+                    android:propertyName="scaleX"
+                    android:valueFrom="0.1"
+                    android:valueTo="4.0"
+                    android:interpolator="@android:anim/decelerate_interpolator"/>
+                <objectAnimator
+                    android:duration="800"
+                    android:startOffset="1200"
+                    android:propertyName="scaleY"
+                    android:valueFrom="0.1"
+                    android:valueTo="4.0"
+                    android:interpolator="@android:anim/decelerate_interpolator"/>
+                <objectAnimator
+                    android:duration="700"
+                    android:startOffset="1300"
+                    android:propertyName="alpha"
+                    android:valueFrom="1"
+                    android:valueTo="0" />
+            </set>
+        </aapt:attr>
+    </target>
+
+</animated-vector>

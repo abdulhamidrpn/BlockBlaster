@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082313424092",
+    "project_id": "block-blaster-ceaf8",
+    "storage_bucket": "block-blaster-ceaf8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082313424092:android:fa56a48d38905d2b654819",
+        "android_client_info": {
+          "package_name": "com.rpn.blockblaster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDaMFvGLD05LoPTR7ZsoW0ER5SUQik0ec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
