@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.BlockBlaster" parent="android:Theme.Material.Light.NoActionBar.Fullscreen" />
+
+     <style name="Theme.BlockBlaster.Splash" parent="Theme.SplashScreen">
+           <item name="windowSplashScreenBackground">#1A1A2E</item>
+           <item name="windowSplashScreenAnimatedIcon">@drawable/avd_splash_screen</item>
+           <item name="postSplashScreenTheme">@style/Theme.BlockBlaster</item>
+       </style>
+</resources>

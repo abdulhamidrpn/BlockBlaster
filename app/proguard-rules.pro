@@ -1,0 +1,5 @@
+-keep class com.rpn.blockblaster.** { *; }
+-keep class androidx.room.** { *; }
+-dontwarn kotlinx.serialization.**
+-keep @kotlinx.serialization.Serializable class * { *; }
+-keepclassmembers class * { @androidx.room.* <methods>; }
