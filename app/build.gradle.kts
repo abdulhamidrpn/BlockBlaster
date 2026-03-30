@@ -8,16 +8,14 @@ plugins {
 android {
     namespace = "com.rpn.blockblaster"
     compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
+        version = release(36)
     }
     defaultConfig {
         applicationId = "com.rpn.blockblaster"
         minSdk = 26
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.0.2"
+        versionCode = 3
+        versionName = "1.0.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -85,8 +83,8 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.bundles.kotlin)
     implementation(libs.bundles.ktor)
-    implementation(libs.bundles.room)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.bundles.room)
     ksp(libs.room.compiler)
     implementation(libs.bundles.datastore)
     implementation(libs.bundles.koin)

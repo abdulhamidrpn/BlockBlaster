@@ -10,10 +10,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import com.rpn.blockblaster.domain.model.BOARD_SIZE
 import com.rpn.blockblaster.domain.model.GamePhase
@@ -64,31 +67,17 @@ fun GameScreen(
     }
 
     // ── LOCAL drag position – never goes through the ViewModel per pixel ───
-    //
-    // fingerX / fingerY : raw screen coordinates of the finger
-    // activeDragIdx     : which tray slot is being dragged
-    // trayY / trayHeight: cached tray bounds for drop detection
     var fingerX       by remember { mutableStateOf(0f) }
     var fingerY       by remember { mutableStateOf(0f) }
     var activeDragIdx by remember { mutableStateOf<Int?>(null) }
     var trayY         by remember { mutableStateOf(0f) }
     var trayHeight    by remember { mutableStateOf(0f) }
 
-    // ── Cell calculation helper ─────────────────────────────────────────────
-    //
-    // The block appears ABOVE the finger with the finger at its BOTTOM-CENTRE.
-    // Formula:
-    //   blockRow = round(fingerRow - block.rows)  → finger at bottom of block
-    //   blockCol = round(fingerCol - block.cols/2) → finger at centre of block
-    //
-    // Both are clamped so the block never goes out of bounds.
-    // This guarantees every row/column is reachable regardless of block size.
     fun computeSnapCell(fx: Float, fy: Float, idx: Int): Pair<Int, Int> {
         val s   = state
         if (s.cellSize <= 0f) return Pair(0, 0)
         val blk = s.trayBlocks.getOrNull(idx) ?: return Pair(0, 0)
 
-        // Exact physical offset used in FloatingBlock so snap aligns perfectly with visual
         val extraOffsetYPx = s.cellSize * 2f
         val visualTopY = fy - (blk.rows * s.cellSize) - extraOffsetYPx
 
@@ -100,7 +89,6 @@ fun GameScreen(
         return Pair(r, c)
     }
 
-    // ── Root Box ────────────────────────────────────────────────────────────
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -114,7 +102,6 @@ fun GameScreen(
                 .windowInsetsPadding(WindowInsets.navigationBars),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // ── Score bar ─────────────────────────────────────────────────
             ScoreBar(
                 currentScore = state.currentScore,
                 bestScore    = state.bestScore,
@@ -126,7 +113,6 @@ fun GameScreen(
 
             Spacer(Modifier.height(10.dp))
 
-            // ── Board + combo – centred in remaining space ─────────────────
             Box(
                 modifier         = Modifier.fillMaxWidth().weight(1f),
                 contentAlignment = Alignment.Center
@@ -136,7 +122,6 @@ fun GameScreen(
                     verticalArrangement = Arrangement.Center,
                     modifier            = Modifier.fillMaxHeight()
                 ) {
-                    // Measure board size for drag coordinate mapping
                     Box(
                         modifier = Modifier
                             .fillMaxWidth(0.97f)
@@ -159,7 +144,7 @@ fun GameScreen(
                             isHighlightValid = state.isHighlightValid,
                             showGrid         = state.settings.showGridLines,
                             isDarkTheme      = state.settings.isDarkTheme,
-                            onBoardLayout    = { _, _, _ -> /* already handled above */ },
+                            onBoardLayout    = { _, _, _ -> },
                             modifier         = Modifier.fillMaxSize()
                         )
                     }
@@ -173,7 +158,6 @@ fun GameScreen(
                 }
             }
 
-            // ── Block tray ─────────────────────────────────────────────────
             BlockTray(
                 blocks         = state.trayBlocks,
                 activeDragIdx  = activeDragIdx,
@@ -194,13 +178,9 @@ fun GameScreen(
                 onDragEnd    = { fx, fy ->
                     val idx = activeDragIdx ?: return@BlockTray
                     activeDragIdx = null
-                    
-                    // Check if drop is in the tray area (do not use tolerance to prevent board overlap)
                     val isTrayDrop = fy >= trayY && fy <= (trayY + trayHeight)
                     
                     if (isTrayDrop && trayHeight > 0f) {
-                        // Calculate which slot (0, 1, or 2) based on X position
-                        // Tray width spans roughly 88% of the screen width
                         val screenWidth = state.cellSize * BOARD_SIZE.toFloat()
                         val trayWidth = screenWidth * 0.88f
                         val trayLeft = state.boardOriginX + (screenWidth - trayWidth) / 2f
@@ -208,12 +188,10 @@ fun GameScreen(
                         val relativeX = fx - trayLeft
                         val targetSlot = (relativeX / slotWidth).toInt().coerceIn(0, 2)
                         
-                        // Only trigger swap if target slot is different
                         if (targetSlot != idx) {
                             vm.onIntent(GameIntent.DropBlockInTray(idx, targetSlot))
                         }
                     } else {
-                        // Drop on board
                         val (r, c) = computeSnapCell(fx, fy, idx)
                         val dropRow = r.coerceIn(0, BOARD_SIZE - 1)
                         val dropCol = c.coerceIn(0, BOARD_SIZE - 1)
@@ -228,7 +206,6 @@ fun GameScreen(
             )
         }
 
-        // ── Floating block – follows finger freely ─────────────────────────
         val dragBlock = activeDragIdx?.let { state.trayBlocks.getOrNull(it) }
         if (dragBlock != null && state.cellSize > 0f) {
             FloatingBlock(
@@ -239,7 +216,6 @@ fun GameScreen(
             )
         }
 
-        // ── Particle explosion ─────────────────────────────────────────────
         if (state.blastingCells.isNotEmpty()) {
             ExplosionEffect(
                 blastingCells = state.blastingCells,
@@ -249,7 +225,6 @@ fun GameScreen(
             )
         }
 
-        // ── Score popups ───────────────────────────────────────────────────
         state.popupMessages.forEach { popup ->
             key(popup.id) {
                 ScorePopupToast(
@@ -262,7 +237,6 @@ fun GameScreen(
             }
         }
 
-        // ── Pause overlay ──────────────────────────────────────────────────
         PauseOverlay(
             visible    = state.phase is GamePhase.Paused,
             onResume   = { vm.onIntent(GameIntent.ResumeGame) },
@@ -271,7 +245,6 @@ fun GameScreen(
             onHome     = { vm.onIntent(GameIntent.NavigateHome) }
         )
 
-        // ── Revive dialog ──────────────────────────────────────────────────
         ReviveDialog(
             visible   = state.phase is GamePhase.RevivePrompt,
             countdown = state.reviveCountdown,
@@ -301,8 +274,6 @@ fun GameScreen(
     }
 }
 
-// ── Score popup ───────────────────────────────────────────────────────────────
-
 @Composable
 private fun ScorePopupToast(
     popup:        ScorePopup,
@@ -313,33 +284,116 @@ private fun ScorePopupToast(
 ) {
     var visible by remember { mutableStateOf(true) }
     LaunchedEffect(popup.id) {
-        delay(1000)
+        delay(2200) // Increased total duration for multi-line animation
         visible = false
-        delay(280)
+        delay(300)
         onDismiss()
     }
+    
     val density = LocalDensity.current
     if (cellSize <= 0f) return
-    val x = with(density) { (boardOriginX + popup.col * cellSize).toDp() }
-    val y = with(density) { (boardOriginY + popup.row * cellSize - cellSize * 2).toDp() }
+
+    val boardWidthDp = with(density) { (cellSize * BOARD_SIZE).toDp() }
+    val boardLeftDp = with(density) { boardOriginX.toDp() }
+    val boardTopDp = with(density) { boardOriginY.toDp() }
+
+    // Position of the blast cell
+    val cellXDp = with(density) { (popup.col * cellSize).toDp() }
+    val cellYDp = with(density) { (popup.row * cellSize).toDp() }
+
+    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
+    val scalePulse by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.08f,
+        animationSpec = infiniteRepeatable(tween(300), RepeatMode.Reverse),
+        label = "scale"
+    )
 
     AnimatedVisibility(
         visible = visible,
-        enter   = fadeIn(tween(120)) + slideInVertically { 24 },
-        exit    = fadeOut(tween(220)) + slideOutVertically { -48 }
+        enter   = fadeIn(tween(150)) + scaleIn(tween(300), initialScale = 0.4f),
+        exit    = fadeOut(tween(400)) + slideOutVertically { -200 } + scaleOut(targetScale = 1.5f),
+        modifier = Modifier
+            .offset(x = boardLeftDp, y = boardTopDp + cellYDp - 40.dp)
+            .width(boardWidthDp) // Constrain to board width
     ) {
-        Box(modifier = Modifier.absoluteOffset(x = x, y = y)) {
-            Text(
-                text       = popup.text,
-                color      = popup.color,
-                fontSize   = 20.sp,
-                fontWeight = FontWeight.ExtraBold
-            )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Line 1: Combo Text
+            if (!popup.comboText.isNullOrBlank()) {
+                val comboParts = popup.comboText.split(" ")
+                val mainText = comboParts.getOrNull(0) ?: ""
+                val numberText = comboParts.getOrNull(1) ?: ""
+                
+                Row(
+                    verticalAlignment = Alignment.Bottom,
+                    modifier = Modifier.graphicsLayer { scaleX = scalePulse; scaleY = scalePulse }
+                ) {
+                    Text(
+                        text = mainText,
+                        color = popup.comboColor,
+                        style = MaterialTheme.typography.displaySmall.copy(
+                            fontWeight = FontWeight.Black,
+                            shadow = Shadow(Color.Black.copy(0.8f), Offset(4f, 4f), 8f)
+                        )
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = numberText,
+                        color = popup.comboColor,
+                        style = MaterialTheme.typography.displayLarge.copy(
+                            fontWeight = FontWeight.Black,
+                            fontSize = 54.sp,
+                            shadow = Shadow(Color.Black.copy(0.8f), Offset(5f, 5f), 10f)
+                        )
+                    )
+                }
+            }
+
+            // Line 2: Points (Delayed)
+            var showPoints by remember { mutableStateOf(false) }
+            LaunchedEffect(Unit) { delay(250); showPoints = true }
+            
+            AnimatedVisibility(
+                visible = showPoints,
+                enter = fadeIn(tween(200)) + expandVertically() + scaleIn(initialScale = 0.8f)
+            ) {
+                Text(
+                    text = popup.pointsText,
+                    color = popup.pointsColor,
+                    style = MaterialTheme.typography.displayMedium.copy(
+                        fontWeight = FontWeight.ExtraBold,
+                        shadow = Shadow(Color.Black.copy(0.7f), Offset(4f, 4f), 8f)
+                    ),
+                    modifier = Modifier.padding(vertical = 2.dp)
+                )
+            }
+
+            // Line 3: Commentary (Further Delayed)
+            var showCommentary by remember { mutableStateOf(false) }
+            LaunchedEffect(Unit) { delay(500); showCommentary = true }
+            
+            AnimatedVisibility(
+                visible = showCommentary,
+                enter = fadeIn(tween(300)) + slideInVertically { 20 }
+            ) {
+                Text(
+                    text = popup.messageText ?: "",
+                    color = popup.messageColor,
+                    style = MaterialTheme.typography.headlineLarge.copy(
+                        fontWeight = FontWeight.Black,
+                        letterSpacing = 2.sp,
+                        shadow = Shadow(Color.Black.copy(0.9f), Offset(3f, 3f), 6f)
+                    ),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
         }
     }
 }
-
-// ── Starfield background ──────────────────────────────────────────────────────
 
 @Composable
 private fun StarfieldBackground() {
