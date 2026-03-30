@@ -1,5 +1,6 @@
 package com.rpn.blockblaster.feature.game
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewModelScope
 import com.rpn.blockblaster.core.common.MviViewModel
 import com.rpn.blockblaster.core.designsystem.AccentRed
@@ -52,7 +53,7 @@ class GameViewModel(
             is GameIntent.ReplayGame     -> { soundManager.play(SoundType.BUTTON_CLICK); startGame() }
             is GameIntent.SetBoardLayout -> setState {
                 copy(boardOriginX = intent.x, boardOriginY = intent.y,
-                     cellSize = intent.width / BOARD_SIZE.toFloat())
+                    cellSize = intent.width / BOARD_SIZE.toFloat())
             }
             is GameIntent.SetTrayLayout  -> {} // Just cache for drop detection
             is GameIntent.BlastAnimationDone -> setState { copy(blastingCells = emptySet()) }
@@ -146,16 +147,16 @@ class GameViewModel(
         val s = currentState
         val fromBlock = s.trayBlocks.getOrNull(fromIdx) ?: return
         val toBlock = s.trayBlocks.getOrNull(toIdx)
-        
+
         // Swap blocks between slots
         val newTray = s.trayBlocks.toMutableList()
         newTray[fromIdx] = toBlock
         newTray[toIdx] = fromBlock
-        
+
         // Play feedback
         sendEvent(GameUiEvent.PlaySound(SoundType.BLOCK_PLACE))
         sendEvent(GameUiEvent.VibrateLight)
-        
+
         // Update state – no gameplay effect, just slot reorganization
         setState {
             copy(
@@ -177,18 +178,59 @@ class GameViewModel(
         val newStreak = calcScore.newComboStreak(result, currentState.comboStreak)
         val blastPts  = calcScore.blastScore(result, newStreak)
         val newScore  = score + blastPts
+        val totalLines = result.rows.size + result.cols.size
+
         val newStats  = stats.copy(
-            linesBlasted = stats.linesBlasted + result.rows.size + result.cols.size,
+            linesBlasted = stats.linesBlasted + totalLines,
             crossBlasts  = stats.crossBlasts + if (result.isCrossBlast) 1 else 0,
             bestCombo    = maxOf(stats.bestCombo, calcScore.comboMultiplier(newStreak))
         )
-        val (popupText, popupColor) = when {
-            result.isPerfectClear -> "PERFECT! +$blastPts" to GoldColor
-            result.isCrossBlast   -> "CROSS! +$blastPts"   to BlockMint
-            newStreak >= 3        -> "COMBO x$newStreak! +$blastPts" to AccentRed
-            else                  -> "+$blastPts"           to BlockTeal
+
+        // Line 1: Combo - showing it even for first blast as requested
+        val comboText = if (newStreak >= 2) "Combo $newStreak" else null
+        val comboColor = when {
+            newStreak >= 8 -> GoldColor
+            newStreak >= 5 -> AccentRed
+            newStreak >= 3 -> BlockMint
+            else -> BlockTeal
         }
-        val popup = ScorePopup(text = popupText, color = popupColor, row = 3, col = 3)
+
+        // Line 2: Points
+        val pointsText = "+$blastPts"
+        val pointsColor = Color.White
+
+        // Line 3: Commentary based on performance
+        val (msgText, msgColor) = when {
+            result.isPerfectClear -> "BOARD CLEAR!!" to GoldColor
+            result.isCrossBlast   -> "CROSS BLAST!" to BlockMint
+            totalLines == 2       -> "EXCELLENT!" to AccentRed
+            totalLines == 3       -> "FANTASTIC!!" to AccentRed
+            totalLines == 4       -> "UNBELIEVABLE!" to GoldColor
+            totalLines == 5       -> "ULTRA COMBO!" to GoldColor
+            newStreak == 6        -> "AMAZING!" to BlockMint
+            newStreak == 7        -> "ON FIRE!!" to AccentRed
+            newStreak >= 8       -> "UNSTOPPABLE!" to GoldColor
+            else                  -> "" to BlockTeal
+        }
+
+        // Positioning: average row/col of blasting cells
+        val avgRow = if (result.blastingCells.isNotEmpty()) {
+            result.blastingCells.map { it.first }.average().toInt().coerceIn(0, BOARD_SIZE - 1)
+        } else 3
+        val avgCol = if (result.blastingCells.isNotEmpty()) {
+            result.blastingCells.map { it.second }.average().toInt().coerceIn(0, BOARD_SIZE - 1)
+        } else 3
+
+        val popup = ScorePopup(
+            comboText = comboText,
+            pointsText = pointsText,
+            messageText = msgText,
+            comboColor = comboColor,
+            pointsColor = pointsColor,
+            messageColor = msgColor,
+            row = avgRow,
+            col = avgCol
+        )
 
         when {
             result.isPerfectClear -> { soundManager.play(SoundType.PERFECT_CLEAR); vibrationManager.vibrateHeavy() }

@@ -4,6 +4,23 @@
             "outputFile": "com.rpn.blockblaster.app-mergeReleaseResources-68:/values-th/values-th.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\64b20b63b217a47c2be0050a899804fa\\workspace\\transformed\\ui\\res\\values-th\\values-th.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "107,215,301,378,475,576,664,749,834,920,1003,1089,1178,1251,1342,1417,1493,1569,1647,1714",
+                        "endColumns": "107,85,76,96,100,87,84,84,85,82,85,88,72,90,74,75,75,77,66,126",
+                        "endOffsets": "210,296,373,470,571,659,744,829,915,998,1084,1173,1246,1337,1412,1488,1564,1642,1709,1836"
+                    },
+                    "to": {
+                        "startLines": "30,38,39,59,60,61,65,66,151,152,164,165,174,175,176,177,178,180,181,182",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "2850,3673,3759,6063,6160,6261,6657,6742,16025,16111,17166,17252,17781,17854,17945,18020,18096,18273,18351,18418",
+                        "endColumns": "107,85,76,96,100,87,84,84,85,82,85,88,72,90,74,75,75,77,66,122",
+                        "endOffsets": "2953,3754,3831,6155,6256,6344,6737,6822,16106,16189,17247,17336,17849,17940,18015,18091,18167,18346,18413,18536"
+                    }
+                },
+                {
                     "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\3597ef4341835fd14ece0acf5161b975\\workspace\\transformed\\adaptive-layout\\res\\values-th\\values-th.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",
@@ -55,23 +72,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\8496e59200f44554c3b74c8c4eb4a4be\\workspace\\transformed\\ui\\res\\values-th\\values-th.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,213,299,376,473,574,662,747,832,918,1001,1087,1176,1249,1340,1415,1491,1567,1645,1712",
-                        "endColumns": "107,85,76,96,100,87,84,84,85,82,85,88,72,90,74,75,75,77,66,122",
-                        "endOffsets": "208,294,371,468,569,657,742,827,913,996,1082,1171,1244,1335,1410,1486,1562,1640,1707,1830"
-                    },
-                    "to": {
-                        "startLines": "30,38,39,59,60,61,65,66,151,152,164,165,174,175,176,177,178,180,181,182",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "2850,3673,3759,6063,6160,6261,6657,6742,16025,16111,17166,17252,17781,17854,17945,18020,18096,18273,18351,18418",
-                        "endColumns": "107,85,76,96,100,87,84,84,85,82,85,88,72,90,74,75,75,77,66,122",
-                        "endOffsets": "2953,3754,3831,6155,6256,6344,6737,6822,16106,16189,17247,17336,17849,17940,18015,18091,18167,18346,18413,18536"
-                    }
-                },
-                {
                     "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\7f05cfb215d93f49baedea617d66e6ad\\workspace\\transformed\\play-services-basement-18.9.0\\res\\values-th\\values.xml",
                     "from": {
                         "startLines": "4",
@@ -89,7 +89,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\10789f1be3a58a03c1892fe7352b3b90\\workspace\\transformed\\foundation\\res\\values-th\\values-th.xml",
+                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\629053592aa72df043fa2e649f149480\\workspace\\transformed\\foundation\\res\\values-th\\values-th.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",

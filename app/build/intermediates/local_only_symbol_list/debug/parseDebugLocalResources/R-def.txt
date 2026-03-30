@@ -8,8 +8,6 @@ color ic_launcher_background
 color white
 drawable avd_splash_screen
 drawable ic_launcher_background
-drawable ic_splash
-drawable logo
 font bold_primetime
 font boldonse
 mipmap ic_launcher

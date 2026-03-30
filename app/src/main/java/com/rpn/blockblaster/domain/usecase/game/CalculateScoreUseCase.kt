@@ -9,12 +9,24 @@ class CalculateScoreUseCase {
 
     fun blastScore(result: BlastResult, comboStreak: Int): Int {
         if (result.rows.isEmpty() && result.cols.isEmpty()) return 0
-        val comboMult = 1f + (comboStreak * 0.2f)
-        return (result.pointsAwarded * comboMult).toInt()
+        
+        // Base points from the blast result
+        var points = result.pointsAwarded.toFloat()
+        
+        // Perfect Clear Bonus: 10x the points if the board is fully cleared!
+        // This is a massive motivator for players.
+        if (result.isPerfectClear) {
+            points *= 10f
+        }
+        
+        // Combo Multiplier: Each streak adds 25% bonus for more intensity
+        val comboMult = 1f + (comboStreak * 0.25f)
+        
+        return (points * comboMult).toInt()
     }
 
     fun newComboStreak(result: BlastResult, current: Int): Int =
         if (result.rows.isEmpty() && result.cols.isEmpty()) 0 else current + 1
 
-    fun comboMultiplier(streak: Int): Float = 1f + (streak * 0.2f)
+    fun comboMultiplier(streak: Int): Float = 1f + (streak * 0.25f)
 }

@@ -187,7 +187,7 @@ private fun BestScorePill(
         Row(verticalAlignment = Alignment.CenterVertically) {
             if (isNewBest) {
                 Text(
-                    text     = "👑",
+                    text     = "👑 ",
                     fontSize = 11.sp,
                     modifier = Modifier
                         .graphicsLayer { scaleX = crownScale; scaleY = crownScale }
