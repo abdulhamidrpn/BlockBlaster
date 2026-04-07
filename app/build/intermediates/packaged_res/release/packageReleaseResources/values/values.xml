@@ -33,6 +33,7 @@
     <string name="perfect">PERFECT CLEAR!</string>
     <string name="play">PLAY</string>
     <string name="play_again">Play Again</string>
+    <string name="play_games_app_id" translatable="false">830994712093</string>
     <string name="project_id" translatable="false">block-blaster-ceaf8</string>
     <string name="restart">Restart</string>
     <string name="resume">Resume</string>

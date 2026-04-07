@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.rpn.blockblaster.app-mergeReleaseResources-68:/values-watch-v21/values-watch-v21.xml",
+            "outputFile": "com.rpn.blockblaster.app-mergeReleaseResources-70:/values-watch-v21/values-watch-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\b65d462e96214b0bca500b3f2a463196\\workspace\\transformed\\appcompat-1.7.1\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\9674bb1d41795aa6cd077409ce78a11c\\workspace\\transformed\\appcompat-1.7.1\\res\\values-watch-v21\\values-watch-v21.xml",
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",

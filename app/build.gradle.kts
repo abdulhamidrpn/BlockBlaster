@@ -1,9 +1,20 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.google.services)
+}
+
+val localProperties = Properties()
+val localPropertiesFile: File = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use { localProperties.load(it) }
+}
+fun getSecret(name: String, default: String = ""): String {
+    return localProperties.getProperty(name, System.getenv(name) ?: default)
 }
 android {
     namespace = "com.rpn.blockblaster"
@@ -14,18 +25,25 @@ android {
         applicationId = "com.rpn.blockblaster"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.0.3"
+        versionCode = 4
+        versionName = "1.0.4"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        manifestPlaceholders["playGamesAppId"] = getSecret("PLAY_GAMES_APP_ID", "")
+        
+        buildConfigField("String", "ADMOB_BANNER_ID", "\"${getSecret("ADMOB_BANNER_ID", "ca-app-pub-3940256099942544/9214589741")}\"")
+        buildConfigField("String", "ADMOB_REWARD_ID", "\"${getSecret("ADMOB_REWARD_ID", "ca-app-pub-3940256099942544/5224354917")}\"")
+        buildConfigField("String", "PLAY_GAMES_LEADERBOARD_ID", "\"${getSecret("PLAY_GAMES_LEADERBOARD_ID", "")}\"")
+        buildConfigField("String", "PLAY_GAMES_ACHIEVEMENT_ID", "\"${getSecret("PLAY_GAMES_ACHIEVEMENT_ID", "")}\"")
     }
 
     signingConfigs {
         create("release") {
             // Provide the path to your .jks file relative to the app directory
-            storeFile = file("keystore.jks")
-            storePassword = "your_store_password"
-            keyAlias = "key0"
-            keyPassword = "your_key_password"
+            storeFile = rootProject.file("keystore")
+            storePassword = getSecret("KEYSTORE_PASSWORD")
+            keyAlias = getSecret("KEY_ALIAS")
+            keyPassword = getSecret("KEY_PASSWORD")
         }
     }
 
@@ -41,7 +59,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            manifestPlaceholders["admobAppId"] = "ca-app-pub-6797594674942943~2429784105"
+            manifestPlaceholders["admobAppId"] = getSecret("ADMOB_APP_ID", "")
         }
     }
     compileOptions {
@@ -90,6 +108,7 @@ dependencies {
     implementation(libs.bundles.koin)
     api(libs.koin.core)
 
+
     implementation("com.google.android.gms:play-services-ads:25.1.0")
     implementation(platform("com.google.firebase:firebase-bom:34.11.0"))
     implementation("com.google.firebase:firebase-analytics")
@@ -100,4 +119,7 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    
+    // Play Ecosystem
+    implementation(libs.bundles.play.services)
 }

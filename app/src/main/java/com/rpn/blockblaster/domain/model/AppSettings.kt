@@ -6,5 +6,6 @@ data class AppSettings(
     val vibrationEnabled:Boolean  = true,
     val isDarkTheme:     Boolean  = true,
     val showGridLines:   Boolean  = true,
-    val animSpeedMs:     Int      = 300   // normal speed
+    val animSpeedMs:     Int      = 300,  // normal speed
+    val gamesPlayed:     Int      = 0
 )

@@ -48,6 +48,7 @@ string paused
 string perfect
 string play
 string play_again
+string play_games_app_id
 string project_id
 string restart
 string resume

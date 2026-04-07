@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rpn.blockblaster"
-    android:versionCode="3"
-    android:versionName="1.0.3" >
+    android:versionCode="4"
+    android:versionName="1.0.4" >
 
     <uses-sdk
         android:minSdkVersion="26"
@@ -11,12 +11,10 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
-    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
-    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS" /> <!-- Android package visibility setting -->
-    <queries>
 
+    <queries>
+        <package android:name="com.google.android.gms" />
+        <package android:name="com.android.vending" />
         <!-- For browser content -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
@@ -24,13 +22,11 @@
             <category android:name="android.intent.category.BROWSABLE" />
 
             <data android:scheme="https" />
-        </intent>
-        <!-- End of browser content -->
+        </intent> <!-- End of browser content -->
         <!-- For CustomTabsService -->
         <intent>
             <action android:name="android.support.customtabs.action.CustomTabsService" />
-        </intent>
-        <!-- End of CustomTabsService -->
+        </intent> <!-- End of CustomTabsService -->
         <!-- For MRAID capabilities -->
         <intent>
             <action android:name="android.intent.action.INSERT" />
@@ -47,9 +43,12 @@
 
             <data android:path="tel:" />
         </intent>
-        <!-- End of MRAID capabilities -->
     </queries>
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -75,6 +74,9 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-6797594674942943~2429784105" />
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="830994712093" />
 
         <activity
             android:name="com.rpn.blockblaster.MainActivity"
@@ -86,7 +88,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+
+        <provider
+            android:name="com.google.android.gms.games.provider.PlayGamesInitProvider"
+            android:authorities="com.rpn.blockblaster.playgamesinitprovider"
+            android:exported="false"
+            android:initOrder="99" />
+
+        <activity
+            android:name="com.google.android.gms.games.internal.v2.resolution.GamesResolutionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Games.Transparent" />
+        <activity
+            android:name="com.google.android.gms.games.internal.v2.appshortcuts.PlayGamesAppShortcutsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Games.Transparent" />
+
+        <meta-data
+            android:name="com.google.android.gms.games.version"
+            android:value="@string/play_games_sdk_version" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
@@ -157,18 +177,17 @@
                 android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
 
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
             android:authorities="com.rpn.blockblaster.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
-
-        <activity
-            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="com.rpn.blockblaster.androidx-startup"
@@ -264,7 +283,12 @@
             <intent-filter>
                 <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
             </intent-filter>
-        </receiver>
+        </receiver> <!-- The activities will be merged into the manifest of the hosting app. -->
+        <activity
+            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+            android:exported="false"
+            android:stateNotNeeded="true"
+            android:theme="@style/Theme.PlayCore.Transparent" />
     </application>
 
 </manifest>

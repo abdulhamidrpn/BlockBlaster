@@ -32,6 +32,10 @@ import com.rpn.blockblaster.service.AdManager
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 @OptIn(DelicateCoroutinesApi::class)
 @Composable
@@ -44,10 +48,15 @@ fun GameScreen(
     val state by vm.state.collectAsState()
     
     val adManager: AdManager = koinInject()
+    val playGamesManager: com.rpn.blockblaster.core.play.PlayGamesManager = koinInject()
+    val profile by playGamesManager.profileState.collectAsState()
+    
+    val actualBest = maxOf(state.bestScore, profile?.rawScore?.toInt() ?: 0)
+    val actualIsNewBest = state.isNewBestScore && state.currentScore > (profile?.rawScore?.toInt() ?: 0)
+    
     val context = LocalContext.current
     val activity = context as? Activity
 
-    // ── One-shot events ────────────────────────────────────────────────────
     var shakeSlot by remember { mutableStateOf<Int?>(null) }
 
     LaunchedEffect(vm) {
@@ -66,144 +75,253 @@ fun GameScreen(
         }
     }
 
-    // ── LOCAL drag position – never goes through the ViewModel per pixel ───
     var fingerX       by remember { mutableStateOf(0f) }
     var fingerY       by remember { mutableStateOf(0f) }
     var activeDragIdx by remember { mutableStateOf<Int?>(null) }
     var trayY         by remember { mutableStateOf(0f) }
     var trayHeight    by remember { mutableStateOf(0f) }
 
-    fun computeSnapCell(fx: Float, fy: Float, idx: Int): Pair<Int, Int> {
-        val s   = state
-        if (s.cellSize <= 0f) return Pair(0, 0)
-        val blk = s.trayBlocks.getOrNull(idx) ?: return Pair(0, 0)
-
-        val extraOffsetYPx = s.cellSize * 2f
-        val visualTopY = fy - (blk.rows * s.cellSize) - extraOffsetYPx
-
-        val fRow = (visualTopY - s.boardOriginY) / s.cellSize
-        val fCol = (fx - s.boardOriginX) / s.cellSize
-
-        val r = fRow.roundToInt().coerceIn(0, BOARD_SIZE - blk.rows)
-        val c = (fCol - blk.cols / 2f).roundToInt().coerceIn(0, BOARD_SIZE - blk.cols)
-        return Pair(r, c)
-    }
-
-    Box(
+    BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surfaceVariant)
     ) {
+        val isLandscape = maxWidth > maxHeight
+        val boxWidth = maxWidth
+        val boxHeight = maxHeight
+        
+        // Reduced offset factor in landscape so the block is closer to finger and bottom can be reached
+        val currentOffsetFactor = if (isLandscape) 1.2f else 2.0f
+
+        fun computeSnapCell(fx: Float, fy: Float, idx: Int): Pair<Int, Int> {
+            val s   = state
+            if (s.cellSize <= 0f) return Pair(0, 0)
+            val blk = s.trayBlocks.getOrNull(idx) ?: return Pair(0, 0)
+
+            val extraOffsetYPx = s.cellSize * currentOffsetFactor
+            val visualTopY = fy - (blk.rows * s.cellSize) - extraOffsetYPx
+
+            val fRow = (visualTopY - s.boardOriginY) / s.cellSize
+            val fCol = (fx - s.boardOriginX) / s.cellSize
+
+            val r = fRow.roundToInt().coerceIn(0, BOARD_SIZE - blk.rows)
+            val c = (fCol - blk.cols / 2f).roundToInt().coerceIn(0, BOARD_SIZE - blk.cols)
+            return Pair(r, c)
+        }
+
         StarfieldBackground()
 
-        Column(
-            modifier            = Modifier
-                .fillMaxSize()
-                .windowInsetsPadding(WindowInsets.navigationBars),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            ScoreBar(
-                currentScore = state.currentScore,
-                bestScore    = state.bestScore,
-                displayScore = state.displayScore,
-                isNewBest    = state.isNewBestScore,
-                onPause      = { vm.onIntent(GameIntent.PauseGame) },
-                onSettings   = onSettings
-            )
-
-            Spacer(Modifier.height(10.dp))
-
-            Box(
-                modifier         = Modifier.fillMaxWidth().weight(1f),
-                contentAlignment = Alignment.Center
+        if (isLandscape) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .windowInsetsPadding(WindowInsets.navigationBars)
+                    .padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier            = Modifier.fillMaxHeight()
+                Box(
+                    modifier = Modifier
+                        .weight(1.2f)
+                        .fillMaxHeight(),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth(0.97f)
-                            .aspectRatio(1f)
-                            .onGloballyPositioned { coords ->
-                                val pos = coords.positionInRoot()
-                                vm.onIntent(
-                                    GameIntent.SetBoardLayout(
-                                        x     = pos.x,
-                                        y     = pos.y,
-                                        width = coords.size.width.toFloat()
-                                    )
-                                )
-                            }
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        GameBoard(
-                            board            = state.board,
-                            blastingCells    = state.blastingCells,
-                            highlightCells   = state.highlightCells,
-                            isHighlightValid = state.isHighlightValid,
-                            showGrid         = state.settings.showGridLines,
-                            isDarkTheme      = state.settings.isDarkTheme,
-                            onBoardLayout    = { _, _, _ -> },
-                            modifier         = Modifier.fillMaxSize()
+                        Box(
+                            modifier = Modifier
+                                .fillMaxHeight(0.9f)
+                                .aspectRatio(1f)
+                                .onGloballyPositioned { coords ->
+                                    val pos = coords.positionInRoot()
+                                    vm.onIntent(
+                                        GameIntent.SetBoardLayout(
+                                            x     = pos.x,
+                                            y     = pos.y,
+                                            width = coords.size.width.toFloat()
+                                        )
+                                    )
+                                }
+                        ) {
+                            GameBoard(
+                                board            = state.board,
+                                blastingCells    = state.blastingCells,
+                                highlightCells   = state.highlightCells,
+                                isHighlightValid = state.isHighlightValid,
+                                showGrid         = state.settings.showGridLines,
+                                isDarkTheme      = state.settings.isDarkTheme,
+                                onBoardLayout    = { _, _, _ -> },
+                                modifier         = Modifier.fillMaxSize()
+                            )
+                        }
+                        Spacer(Modifier.height(8.dp))
+                        ComboIndicator(
+                            streak   = state.comboStreak,
+                            modifier = Modifier.padding(horizontal = 12.dp)
                         )
                     }
+                }
 
-                    Spacer(Modifier.height(8.dp))
-
-                    ComboIndicator(
-                        streak   = state.comboStreak,
-                        modifier = Modifier.padding(horizontal = 12.dp)
+                Column(
+                    modifier = Modifier
+                        .weight(0.8f)
+                        .fillMaxHeight(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    ScoreBar(
+                        currentScore = state.currentScore,
+                        bestScore    = actualBest,
+                        displayScore = state.displayScore,
+                        isNewBest    = actualIsNewBest,
+                        onPause      = { vm.onIntent(GameIntent.PauseGame) },
+                        onSettings   = onSettings
                     )
+                    
+                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                        BlockTray(
+                            blocks         = state.trayBlocks,
+                            activeDragIdx  = activeDragIdx,
+                            shakeSlotIndex = shakeSlot,
+                            onDragStart    = { idx, fx, fy ->
+                                activeDragIdx = idx
+                                fingerX = fx
+                                fingerY = fy
+                                vm.onIntent(GameIntent.StartDrag(idx))
+                            },
+                            onDragUpdate = { fx, fy ->
+                                fingerX = fx
+                                fingerY = fy
+                                val idx = activeDragIdx ?: return@BlockTray
+                                val (r, c) = computeSnapCell(fx, fy, idx)
+                                vm.onIntent(GameIntent.UpdateDragCell(r, c))
+                            },
+                            onDragEnd    = { fx, fy ->
+                                val idx = activeDragIdx ?: return@BlockTray
+                                activeDragIdx = null
+                                val (r, c) = computeSnapCell(fx, fy, idx)
+                                val dropRow = r.coerceIn(0, BOARD_SIZE - 1)
+                                val dropCol = c.coerceIn(0, BOARD_SIZE - 1)
+                                vm.onIntent(GameIntent.DropBlock(dropRow, dropCol))
+                            },
+                            onTrayLayout = { y, h ->
+                                trayY = y
+                                trayHeight = h
+                                vm.onIntent(GameIntent.SetTrayLayout(y, h))
+                            }
+                        )
+                    }
                 }
             }
+        } else {
+            Column(
+                modifier            = Modifier
+                    .fillMaxSize()
+                    .windowInsetsPadding(WindowInsets.navigationBars),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                ScoreBar(
+                    currentScore = state.currentScore,
+                    bestScore    = actualBest,
+                    displayScore = state.displayScore,
+                    isNewBest    = actualIsNewBest,
+                    onPause      = { vm.onIntent(GameIntent.PauseGame) },
+                    onSettings   = onSettings
+                )
 
-            BlockTray(
-                blocks         = state.trayBlocks,
-                activeDragIdx  = activeDragIdx,
-                shakeSlotIndex = shakeSlot,
-                onDragStart    = { idx, fx, fy ->
-                    activeDragIdx = idx
-                    fingerX = fx
-                    fingerY = fy
-                    vm.onIntent(GameIntent.StartDrag(idx))
-                },
-                onDragUpdate = { fx, fy ->
-                    fingerX = fx
-                    fingerY = fy
-                    val idx = activeDragIdx ?: return@BlockTray
-                    val (r, c) = computeSnapCell(fx, fy, idx)
-                    vm.onIntent(GameIntent.UpdateDragCell(r, c))
-                },
-                onDragEnd    = { fx, fy ->
-                    val idx = activeDragIdx ?: return@BlockTray
-                    activeDragIdx = null
-                    val isTrayDrop = fy >= trayY && fy <= (trayY + trayHeight)
-                    
-                    if (isTrayDrop && trayHeight > 0f) {
-                        val screenWidth = state.cellSize * BOARD_SIZE.toFloat()
-                        val trayWidth = screenWidth * 0.88f
-                        val trayLeft = state.boardOriginX + (screenWidth - trayWidth) / 2f
-                        val slotWidth = trayWidth / 3f
-                        val relativeX = fx - trayLeft
-                        val targetSlot = (relativeX / slotWidth).toInt().coerceIn(0, 2)
-                        
-                        if (targetSlot != idx) {
-                            vm.onIntent(GameIntent.DropBlockInTray(idx, targetSlot))
+                Spacer(Modifier.height(10.dp))
+
+                Box(
+                    modifier         = Modifier.fillMaxWidth().weight(1f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                        modifier            = Modifier.fillMaxHeight()
+                    ) {
+                        val portraitBoardSize = minOf(boxWidth * 0.95f, boxHeight * 0.60f)
+                        Box(
+                            modifier = Modifier
+                                .size(portraitBoardSize)
+                                .aspectRatio(1f)
+                                .onGloballyPositioned { coords ->
+                                    val pos = coords.positionInRoot()
+                                    vm.onIntent(
+                                        GameIntent.SetBoardLayout(
+                                            x     = pos.x,
+                                            y     = pos.y,
+                                            width = coords.size.width.toFloat()
+                                        )
+                                    )
+                                }
+                        ) {
+                            GameBoard(
+                                board            = state.board,
+                                blastingCells    = state.blastingCells,
+                                highlightCells   = state.highlightCells,
+                                isHighlightValid = state.isHighlightValid,
+                                showGrid         = state.settings.showGridLines,
+                                isDarkTheme      = state.settings.isDarkTheme,
+                                onBoardLayout    = { _, _, _ -> },
+                                modifier         = Modifier.fillMaxSize()
+                            )
                         }
-                    } else {
-                        val (r, c) = computeSnapCell(fx, fy, idx)
-                        val dropRow = r.coerceIn(0, BOARD_SIZE - 1)
-                        val dropCol = c.coerceIn(0, BOARD_SIZE - 1)
-                        vm.onIntent(GameIntent.DropBlock(dropRow, dropCol))
+
+                        Spacer(Modifier.height(8.dp))
+
+                        ComboIndicator(
+                            streak   = state.comboStreak,
+                            modifier = Modifier.padding(horizontal = 12.dp)
+                        )
                     }
-                },
-                onTrayLayout = { y, h ->
-                    trayY = y
-                    trayHeight = h
-                    vm.onIntent(GameIntent.SetTrayLayout(y, h))
                 }
-            )
+
+                BlockTray(
+                    blocks         = state.trayBlocks,
+                    activeDragIdx  = activeDragIdx,
+                    shakeSlotIndex = shakeSlot,
+                    onDragStart    = { idx, fx, fy ->
+                        activeDragIdx = idx
+                        fingerX = fx
+                        fingerY = fy
+                        vm.onIntent(GameIntent.StartDrag(idx))
+                    },
+                    onDragUpdate = { fx, fy ->
+                        fingerX = fx
+                        fingerY = fy
+                        val idx = activeDragIdx ?: return@BlockTray
+                        val (r, c) = computeSnapCell(fx, fy, idx)
+                        vm.onIntent(GameIntent.UpdateDragCell(r, c))
+                    },
+                    onDragEnd    = { fx, fy ->
+                        val idx = activeDragIdx ?: return@BlockTray
+                        activeDragIdx = null
+                        val isTrayDrop = fy >= trayY && fy <= (trayY + trayHeight)
+                        
+                        if (isTrayDrop && trayHeight > 0f) {
+                            val trayWidth = boxWidth.value
+                            val slotWidth = trayWidth / 3f
+                            val targetSlot = (fx / slotWidth).toInt().coerceIn(0, 2)
+                            
+                            if (targetSlot != idx) {
+                                vm.onIntent(GameIntent.DropBlockInTray(idx, targetSlot))
+                            }
+                        } else {
+                            val (r, c) = computeSnapCell(fx, fy, idx)
+                            val dropRow = r.coerceIn(0, BOARD_SIZE - 1)
+                            val dropCol = c.coerceIn(0, BOARD_SIZE - 1)
+                            vm.onIntent(GameIntent.DropBlock(dropRow, dropCol))
+                        }
+                    },
+                    onTrayLayout = { y, h ->
+                        trayY = y
+                        trayHeight = h
+                        vm.onIntent(GameIntent.SetTrayLayout(y, h))
+                    }
+                )
+            }
         }
 
         val dragBlock = activeDragIdx?.let { state.trayBlocks.getOrNull(it) }
@@ -212,7 +330,8 @@ fun GameScreen(
                 block    = dragBlock,
                 screenX  = fingerX,
                 screenY  = fingerY,
-                cellSize = state.cellSize
+                cellSize = state.cellSize,
+                offsetFactor = currentOffsetFactor
             )
         }
 
@@ -284,7 +403,7 @@ private fun ScorePopupToast(
 ) {
     var visible by remember { mutableStateOf(true) }
     LaunchedEffect(popup.id) {
-        delay(2200) // Increased total duration for multi-line animation
+        delay(2200)
         visible = false
         delay(300)
         onDismiss()
@@ -297,8 +416,6 @@ private fun ScorePopupToast(
     val boardLeftDp = with(density) { boardOriginX.toDp() }
     val boardTopDp = with(density) { boardOriginY.toDp() }
 
-    // Position of the blast cell
-    val cellXDp = with(density) { (popup.col * cellSize).toDp() }
     val cellYDp = with(density) { (popup.row * cellSize).toDp() }
 
     val infiniteTransition = rememberInfiniteTransition(label = "pulse")
@@ -315,13 +432,12 @@ private fun ScorePopupToast(
         exit    = fadeOut(tween(400)) + slideOutVertically { -200 } + scaleOut(targetScale = 1.5f),
         modifier = Modifier
             .offset(x = boardLeftDp, y = boardTopDp + cellYDp - 40.dp)
-            .width(boardWidthDp) // Constrain to board width
+            .width(boardWidthDp)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Line 1: Combo Text
             if (!popup.comboText.isNullOrBlank()) {
                 val comboParts = popup.comboText.split(" ")
                 val mainText = comboParts.getOrNull(0) ?: ""
@@ -352,7 +468,6 @@ private fun ScorePopupToast(
                 }
             }
 
-            // Line 2: Points (Delayed)
             var showPoints by remember { mutableStateOf(false) }
             LaunchedEffect(Unit) { delay(250); showPoints = true }
             
@@ -371,7 +486,6 @@ private fun ScorePopupToast(
                 )
             }
 
-            // Line 3: Commentary (Further Delayed)
             var showCommentary by remember { mutableStateOf(false) }
             LaunchedEffect(Unit) { delay(500); showCommentary = true }
             
@@ -414,6 +528,18 @@ private fun StarfieldBackground() {
                 radius = r.toFloat(),
                 center = Offset(sx * size.width, sy * size.height)
             )
+        }
+    }
+}
+
+@Preview(name = "Phone")
+@Preview(name = "Tablet", device = Devices.TABLET)
+@Preview(name = "Foldable", device = Devices.FOLDABLE)
+@Composable
+private fun GameScreenPreview() {
+    MaterialTheme {
+        Box(modifier = Modifier.fillMaxSize()) {
+            StarfieldBackground()
         }
     }
 }

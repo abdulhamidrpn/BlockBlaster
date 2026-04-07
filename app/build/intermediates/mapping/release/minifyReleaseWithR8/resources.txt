@@ -1,258 +1,263 @@
-string:state_empty:2131689683 reachable from Field int androidx.compose.ui.R$string.state_empty
-id:tag_state_description:2131296458 reachable from Field int androidx.core.R$id.tag_state_description
-attr:fontProviderFallbackQuery:2130903199 reachable from Field int[] androidx.core.R$styleable.FontFamily
-style:DialogWindowTheme:2131755176 reachable from Field int androidx.compose.ui.R$style.DialogWindowTheme
-string:vibration:2131689695 reachable from Field int com.rpn.blockblaster.R$string.vibration
-id:tag_system_bar_state_monitor:2131296459 reachable from Field int androidx.core.R$id.tag_system_bar_state_monitor
-id:tag_accessibility_pane_title:2131296452 reachable from Field int androidx.core.R$id.tag_accessibility_pane_title
-mipmap:ic_launcher_foreground:2131558401 reachable from res/mipmap-anydpi-v26/ic_launcher.xml
-string:gcm_defaultSenderId:2131689549 reachable from keep xml file
-dimen:splashscreen_icon_mask_size_no_background:2131099762 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
-drawable:admob_close_button_white_cross:2131165269 reachable from Field int com.google.android.gms.ads.impl.R$drawable.admob_close_button_white_cross
-string:drop_it_like:2131689543 reachable from Field int com.rpn.blockblaster.R$string.drop_it_like
-string:clear_best_score:2131689516 reachable from Field int com.rpn.blockblaster.R$string.clear_best_score
-drawable:abc_vector_test:2131165266 reachable from Field int androidx.appcompat.resources.R$drawable.abc_vector_test
-string:common_google_play_services_unsupported_text:2131689529 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_unsupported_text
-color:gold:2131034181 reachable from Field int com.rpn.blockblaster.R$color.gold
-string:not_selected:2131689646 reachable from Field int androidx.compose.ui.R$string.not_selected
-id:special_effects_controller_view_tag:2131296438 reachable from Field int androidx.fragment.R$id.special_effects_controller_view_tag
-animator:fragment_open_exit:2130837509 reachable from Field int androidx.fragment.R$animator.fragment_open_exit
-dimen:splashscreen_icon_size_with_background:2131099768 reachable from Field int androidx.core.splashscreen.R$dimen.splashscreen_icon_size_with_background
-style:Base_v21_Theme_SplashScreen_Light:2131755173 reachable from style:Base_Theme_SplashScreen_Light:2131755084
-id:transition_clip:2131296475 reachable from Field int androidx.transition.R$id.transition_clip
-string:cross_blasts:2131689539 reachable from Field int com.rpn.blockblaster.R$string.cross_blasts
-attr:fontProviderAuthority:2130903197 reachable from Field int[] androidx.core.R$styleable.FontFamily
-raw:cross_blast:2131623940 reachable from Field int com.rpn.blockblaster.R$raw.cross_blast
-id:tag_on_apply_window_listener:2131296454 reachable from Field int androidx.core.R$id.tag_on_apply_window_listener
-id:accessibility_action_clickable_span:2131296262 reachable from Field int androidx.core.R$id.accessibility_action_clickable_span
-xml:backup_rules:2131886080 reachable from AndroidManifest.xml
-animator:fragment_fade_enter:2130837506 reachable from Field int androidx.fragment.R$animator.fragment_fade_enter
-raw:invalid:2131623943 reachable from Field int com.rpn.blockblaster.R$raw.invalid
-string:common_google_play_services_install_title:2131689525 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_install_title
-string:lines_blasted:2131689559 reachable from Field int com.rpn.blockblaster.R$string.lines_blasted
-string:best:2131689505 reachable from Field int com.rpn.blockblaster.R$string.best
-string:google_app_id:2131689552 reachable from keep xml file
-string:google_storage_bucket:2131689554 reachable from keep xml file
-attr:font:2130903195 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
-string:new_best:2131689645 reachable from Field int com.rpn.blockblaster.R$string.new_best
-attr:adUnitId:2130903081 reachable from Field int[] com.google.android.gms.ads.R$styleable.AdsAttrs
-string:offline_dialog_image_description:2131689650 reachable from res/layout/offline_ads_dialog.xml
-string:common_google_play_services_updating_text:2131689533 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_updating_text
-id:pooling_container_listener_holder_tag:2131296408 reachable from Field int androidx.customview.poolingcontainer.R$id.pooling_container_listener_holder_tag
-string:daily_challenge:2131689540 reachable from Field int com.rpn.blockblaster.R$string.daily_challenge
-attr:fontProviderCerts:2130903198 reachable from Field int[] androidx.core.R$styleable.FontFamily
-id:layout:2131296383 reachable from res/layout/admob_empty_layout.xml
-string:notifications_permission_title:2131689649 reachable from Field int com.google.android.gms.ads.impl.R$string.notifications_permission_title
-style:Base_v27_Theme_SplashScreen_Light:2131755175 reachable from style:Base_Theme_SplashScreen_Light:2131755084
-dimen:splashscreen_icon_size_no_background:2131099767 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
-id:accessibility_custom_action_26:2131296282 reachable from Field int androidx.core.R$id.accessibility_custom_action_26
-id:accessibility_custom_action_25:2131296281 reachable from Field int androidx.core.R$id.accessibility_custom_action_25
-id:accessibility_custom_action_28:2131296284 reachable from Field int androidx.core.R$id.accessibility_custom_action_28
-id:accessibility_custom_action_27:2131296283 reachable from Field int androidx.core.R$id.accessibility_custom_action_27
-id:accessibility_custom_action_29:2131296285 reachable from Field int androidx.core.R$id.accessibility_custom_action_29
-string:share_score:2131689679 reachable from Field int com.rpn.blockblaster.R$string.share_score
-id:hide_graphics_layer_in_inspector_tag:2131296368 reachable from Field int androidx.compose.ui.graphics.R$id.hide_graphics_layer_in_inspector_tag
-mipmap:ic_launcher_round:2131558402 reachable from AndroidManifest.xml
-id:tag_compat_insets_dispatch:2131296453 reachable from Field int androidx.core.R$id.tag_compat_insets_dispatch
-id:offline_dialog_image:2131296403 reachable from res/layout/offline_ads_dialog.xml
-style:Base_Theme_SplashScreen_Light:2131755084 reachable from style:Base_Theme_SplashScreen_DayNight:2131755083
-string:resume:2131689666 reachable from Field int com.rpn.blockblaster.R$string.resume
-string:sound_effects:2131689682 reachable from Field int com.rpn.blockblaster.R$string.sound_effects
-attr:isLightTheme:2130903225 reachable from style:Base_v21_Theme_SplashScreen_Light:2131755173
-id:inspection_slot_table_set:2131296379 reachable from Field int androidx.compose.ui.R$id.inspection_slot_table_set
-id:view_tree_lifecycle_owner:2131296488 reachable from Field int androidx.lifecycle.runtime.R$id.view_tree_lifecycle_owner
-id:transition_pause_alpha:2131296479 reachable from Field int androidx.transition.R$id.transition_pause_alpha
-string:keep_playing:2131689558 reachable from Field int com.rpn.blockblaster.R$string.keep_playing
-id:tag_unhandled_key_listeners:2131296462 reachable from Field int androidx.core.R$id.tag_unhandled_key_listeners
-string:offline_opt_in_title:2131689657 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_opt_in_title
-id:accessibility_custom_action_20:2131296276 reachable from Field int androidx.core.R$id.accessibility_custom_action_20
-attr:fontVariationSettings:2130903206 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
-id:accessibility_custom_action_22:2131296278 reachable from Field int androidx.core.R$id.accessibility_custom_action_22
-id:accessibility_custom_action_21:2131296277 reachable from Field int androidx.core.R$id.accessibility_custom_action_21
-id:accessibility_custom_action_24:2131296280 reachable from Field int androidx.core.R$id.accessibility_custom_action_24
-id:accessibility_custom_action_23:2131296279 reachable from Field int androidx.core.R$id.accessibility_custom_action_23
-string:indeterminate:2131689557 reachable from Field int androidx.compose.ui.R$string.indeterminate
-string:state_off:2131689684 reachable from Field int androidx.compose.ui.R$string.state_off
-string:common_google_play_services_notification_ticker:2131689527 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_notification_ticker
-string:play_again:2131689661 reachable from Field int com.rpn.blockblaster.R$string.play_again
-drawable:admob_close_button_white_circle_black_cross:2131165268 reachable from Field int com.google.android.gms.ads.impl.R$drawable.admob_close_button_white_circle_black_cross
-id:transition_current_scene:2131296476 reachable from Field int androidx.transition.R$id.transition_current_scene
-raw:block_place:2131623937 reachable from Field int com.rpn.blockblaster.R$raw.block_place
-string:best_combo:2131689506 reachable from Field int com.rpn.blockblaster.R$string.best_combo
-attr:windowSplashScreenAnimationDuration:2130903394 reachable from style:Theme_SplashScreen:2131755288
-string:offline_opt_in_confirm:2131689654 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_opt_in_confirm
-id:consume_window_insets_tag:2131296346 reachable from Field int androidx.compose.ui.R$id.consume_window_insets_tag
-string:state_on:2131689685 reachable from Field int androidx.compose.ui.R$string.state_on
-id:accessibility_custom_action_31:2131296288 reachable from Field int androidx.core.R$id.accessibility_custom_action_31
-string:native_headline:2131689642 reachable from Field int com.google.android.gms.ads.impl.R$string.native_headline
-id:accessibility_custom_action_30:2131296287 reachable from Field int androidx.core.R$id.accessibility_custom_action_30
-color:accent:2131034137 reachable from Field int com.rpn.blockblaster.R$color.accent
-attr:fontProviderFetchTimeout:2130903201 reachable from Field int[] androidx.core.R$styleable.FontFamily
-string:theme:2131689691 reachable from Field int com.rpn.blockblaster.R$string.theme
-string:common_google_play_services_wear_update_text:2131689534 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_wear_update_text
-id:tag_accessibility_actions:2131296449 reachable from Field int androidx.core.R$id.tag_accessibility_actions
-attr:adSize:2130903079 reachable from Field int[] com.google.android.gms.ads.R$styleable.AdsAttrs
-string:best_score:2131689507 reachable from Field int com.rpn.blockblaster.R$string.best_score
-id:view_tree_navigation_event_dispatcher_owner:2131296489 reachable from Field int androidx.navigationevent.R$id.view_tree_navigation_event_dispatcher_owner
-string:notifications_permission_confirm:2131689647 reachable from Field int com.google.android.gms.ads.impl.R$string.notifications_permission_confirm
-style:Theme_SplashScreen:2131755288 reachable from style:Theme_BlockBlaster_Splash:2131755286
-string:common_google_play_services_unknown_issue:2131689528 reachable from Field int com.google.android.gms.common.R$string.common_google_play_services_unknown_issue
-string:common_google_play_services_update_button:2131689530 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_update_button
-raw:revive:2131623945 reachable from Field int com.rpn.blockblaster.R$raw.revive
-id:accessibility_custom_action_15:2131296270 reachable from Field int androidx.core.R$id.accessibility_custom_action_15
-attr:fontProviderSystemFontFamily:2130903204 reachable from Field int[] androidx.core.R$styleable.FontFamily
-id:accessibility_custom_action_14:2131296269 reachable from Field int androidx.core.R$id.accessibility_custom_action_14
-id:accessibility_custom_action_17:2131296272 reachable from Field int androidx.core.R$id.accessibility_custom_action_17
-attr:splashScreenIconSize:2130903310 reachable from style:Theme_SplashScreen_Common:2131755289
-id:accessibility_custom_action_16:2131296271 reachable from Field int androidx.core.R$id.accessibility_custom_action_16
-dimen:compat_notification_large_icon_max_height:2131099736 reachable from Field int androidx.core.R$dimen.compat_notification_large_icon_max_height
-id:accessibility_custom_action_19:2131296274 reachable from Field int androidx.core.R$id.accessibility_custom_action_19
-id:accessibility_custom_action_18:2131296273 reachable from Field int androidx.core.R$id.accessibility_custom_action_18
-id:offline_dialog_advertiser_name:2131296402 reachable from res/layout/offline_ads_dialog.xml
-id:save_overlay_view:2131296417 reachable from Field int androidx.transition.R$id.save_overlay_view
-string:game_over:2131689548 reachable from Field int com.rpn.blockblaster.R$string.game_over
-style:Theme_BlockBlaster:2131755285 reachable from style:Theme_BlockBlaster_Splash:2131755286
-color:background_dark:2131034142 reachable from Field int com.rpn.blockblaster.R$color.background_dark
-id:report_drawn:2131296412 reachable from Field int androidx.activity.R$id.report_drawn
-string:common_open_on_phone:2131689535 reachable from Field int com.google.android.gms.base.R$string.common_open_on_phone
-id:tag_unhandled_key_event_manager:2131296461 reachable from Field int androidx.core.R$id.tag_unhandled_key_event_manager
-raw:blast:2131623936 reachable from Field int com.rpn.blockblaster.R$raw.blast
-attr:fontProviderPackage:2130903202 reachable from Field int[] androidx.core.R$styleable.FontFamily
-string:google_api_key:2131689551 reachable from keep xml file
-id:is_pooling_container_tag:2131296380 reachable from Field int androidx.customview.poolingcontainer.R$id.is_pooling_container_tag
-style:FloatingDialogWindowTheme:2131755179 reachable from Field int androidx.compose.ui.R$style.FloatingDialogWindowTheme
-id:tag_screen_reader_focusable:2131296457 reachable from Field int androidx.core.R$id.tag_screen_reader_focusable
-string:common_google_play_services_install_text:2131689524 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_install_text
-id:accessibility_custom_action_11:2131296266 reachable from Field int androidx.core.R$id.accessibility_custom_action_11
-string:project_id:2131689662 reachable from keep xml file
-id:accessibility_custom_action_10:2131296265 reachable from Field int androidx.core.R$id.accessibility_custom_action_10
-attr:fontWeight:2130903207 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
-id:view_tree_on_back_pressed_dispatcher_owner:2131296490 reachable from Field int androidx.activity.R$id.view_tree_on_back_pressed_dispatcher_owner
-id:accessibility_custom_action_13:2131296268 reachable from Field int androidx.core.R$id.accessibility_custom_action_13
-id:accessibility_custom_action_12:2131296267 reachable from Field int androidx.core.R$id.accessibility_custom_action_12
-string:native_body:2131689641 reachable from Field int com.google.android.gms.ads.impl.R$string.native_body
-string:common_google_play_services_enable_button:2131689520 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_enable_button
-id:tag_window_insets_animation_callback:2131296463 reachable from Field int androidx.core.R$id.tag_window_insets_animation_callback
-layout:offline_ads_dialog:2131492904 reachable from Field int com.google.android.gms.ads.impl.R$layout.offline_ads_dialog
-drawable:admob_close_button_black_circle_white_cross:2131165267 reachable from Field int com.google.android.gms.ads.impl.R$drawable.admob_close_button_black_circle_white_cross
-animator:fragment_open_enter:2130837508 reachable from Field int androidx.fragment.R$animator.fragment_open_enter
-id:hide_in_inspector_tag:2131296370 reachable from Field int androidx.compose.ui.R$id.hide_in_inspector_tag
-font:bold_primetime:2131230720 reachable from Field int com.rpn.blockblaster.R$font.bold_primetime
-string:common_google_play_services_enable_text:2131689521 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_enable_text
-string:common_google_play_services_notification_channel_name:2131689526 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_notification_channel_name
-string:common_google_play_services_enable_title:2131689522 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_enable_title
-attr:fontProviderQuery:2130903203 reachable from Field int[] androidx.core.R$styleable.FontFamily
-color:white:2131034223 reachable from Field int com.rpn.blockblaster.R$color.white
-raw:button_click:2131623938 reachable from Field int com.rpn.blockblaster.R$raw.button_click
-animator:fragment_close_enter:2130837504 reachable from Field int androidx.fragment.R$animator.fragment_close_enter
-string:androidx_startup:2131689501 reachable from Field int androidx.startup.R$string.androidx_startup
-id:view_tree_view_model_store_owner:2131296492 reachable from Field int androidx.lifecycle.viewmodel.R$id.view_tree_view_model_store_owner
-xml:data_extraction_rules:2131886081 reachable from AndroidManifest.xml
-attr:ttcIndex:2130903379 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
-string:paused:2131689658 reachable from Field int com.rpn.blockblaster.R$string.paused
 string:notifications_permission_decline:2131689648 reachable from Field int com.google.android.gms.ads.impl.R$string.notifications_permission_decline
-id:tag_accessibility_clickable_spans:2131296450 reachable from Field int androidx.core.R$id.tag_accessibility_clickable_spans
-anim:fragment_fast_out_extra_slow_in:2130771992 reachable from res/animator/fragment_close_enter.xml
-attr:fontStyle:2130903205 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
-string:offline_notification_title_with_advertiser:2131689653 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_notification_title_with_advertiser
-string:home:2131689555 reachable from Field int com.rpn.blockblaster.R$string.home
-integer:google_play_services_version:2131361797 reachable from AndroidManifest.xml
-attr:postSplashScreenTheme:2130903278 reachable from style:Theme_SplashScreen:2131755288
-string:offline_notification_title:2131689652 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_notification_title
-raw:combo:2131623939 reachable from Field int com.rpn.blockblaster.R$raw.combo
-string:native_media_view:2131689643 reachable from Field int com.google.android.gms.ads.impl.R$string.native_media_view
-string:watermark_label_prefix:2131689696 reachable from Field int com.google.android.gms.ads.impl.R$string.watermark_label_prefix
-integer:default_icon_animation_duration:2131361796 reachable from style:Theme_SplashScreen:2131755288
-string:your_score:2131689697 reachable from Field int com.rpn.blockblaster.R$string.your_score
-style:Theme_BlockBlaster_Splash:2131755286 reachable from AndroidManifest.xml
-id:offline_dialog_text:2131296404 reachable from res/layout/offline_ads_dialog.xml
-string:score:2131689675 reachable from Field int com.rpn.blockblaster.R$string.score
-layout:admob_empty_layout:2131492892 reachable from Field int com.google.android.gms.ads.R$layout.admob_empty_layout
-string:give_up:2131689550 reachable from Field int com.rpn.blockblaster.R$string.give_up
-string:stats:2131689686 reachable from Field int com.rpn.blockblaster.R$string.stats
-drawable:$avd_splash_screen__1:2131165185 reachable from res/drawable/avd_splash_screen.xml
-string:s4:2131689671 reachable from Field int com.google.android.gms.ads.impl.R$string.s4
-drawable:$avd_splash_screen__0:2131165184 reachable from res/drawable/avd_splash_screen.xml
-string:s5:2131689672 reachable from Field int com.google.android.gms.ads.impl.R$string.s5
-id:auto_clear_focus_behavior_tag:2131296327 reachable from Field int androidx.compose.ui.R$id.auto_clear_focus_behavior_tag
-string:s6:2131689673 reachable from Field int com.google.android.gms.ads.impl.R$string.s6
-string:s7:2131689674 reachable from Field int com.google.android.gms.ads.impl.R$string.s7
-string:s1:2131689668 reachable from Field int com.google.android.gms.ads.impl.R$string.s1
-drawable:$avd_splash_screen__3:2131165187 reachable from res/drawable/avd_splash_screen.xml
-string:s2:2131689669 reachable from Field int com.google.android.gms.ads.impl.R$string.s2
-drawable:$avd_splash_screen__2:2131165186 reachable from res/drawable/avd_splash_screen.xml
-string:s3:2131689670 reachable from Field int com.google.android.gms.ads.impl.R$string.s3
-id:tag_accessibility_heading:2131296451 reachable from Field int androidx.core.R$id.tag_accessibility_heading
-attr:windowSplashScreenAnimatedIcon:2130903393 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
-dimen:compat_notification_large_icon_max_width:2131099737 reachable from Field int androidx.core.R$dimen.compat_notification_large_icon_max_width
-string:in_progress:2131689556 reachable from Field int androidx.compose.ui.R$string.in_progress
-id:fragment_container_view_tag:2131296364 reachable from Field int androidx.fragment.R$id.fragment_container_view_tag
-bool:enable_system_job_service_default:2130968580 reachable from AndroidManifest.xml
-color:ic_launcher_background:2131034184 reachable from res/mipmap-anydpi-v26/ic_launcher.xml
-id:compose_view_saveable_id_tag:2131296345 reachable from Field int androidx.compose.ui.R$id.compose_view_saveable_id_tag
-style:Base_v21_Theme_SplashScreen:2131755172 reachable from style:Base_Theme_SplashScreen:2131755082
-string:play:2131689660 reachable from Field int com.rpn.blockblaster.R$string.play
-string:offline_opt_in_message:2131689656 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_opt_in_message
-attr:windowSplashScreenBackground:2130903395 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
-string:blocks_placed:2131689508 reachable from Field int com.rpn.blockblaster.R$string.blocks_placed
-string:combo:2131689519 reachable from Field int com.rpn.blockblaster.R$string.combo
-font:boldonse:2131230721 reachable from Field int com.rpn.blockblaster.R$font.boldonse
-string:offline_dialog_text:2131689651 reachable from from dex
-drawable:ic_launcher_background:2131165308 reachable from Field int com.rpn.blockblaster.R$drawable.ic_launcher_background
-attr:fontProviderFetchStrategy:2130903200 reachable from Field int[] androidx.core.R$styleable.FontFamily
-drawable:avd_splash_screen:2131165270 reachable from style:Theme_BlockBlaster_Splash:2131755286
-id:visible_removing_fragment_view_tag:2131296493 reachable from Field int androidx.fragment.R$id.visible_removing_fragment_view_tag
-string:common_google_play_services_install_button:2131689523 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_install_button
-style:Base_Theme_SplashScreen:2131755082 reachable from style:Base_Theme_SplashScreen_Light:2131755084
-string:common_google_play_services_update_title:2131689532 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_update_title
-animator:fragment_close_exit:2130837505 reachable from Field int androidx.fragment.R$animator.fragment_close_exit
-string:common_google_play_services_update_text:2131689531 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_update_text
-string:template_percent:2131689690 reachable from Field int androidx.compose.ui.R$string.template_percent
-string:background_music:2131689504 reachable from Field int com.rpn.blockblaster.R$string.background_music
-id:accessibility_custom_action_3:2131296286 reachable from Field int androidx.core.R$id.accessibility_custom_action_3
-id:accessibility_custom_action_4:2131296289 reachable from Field int androidx.core.R$id.accessibility_custom_action_4
-string:version:2131689694 reachable from Field int com.rpn.blockblaster.R$string.version
-id:accessibility_custom_action_5:2131296290 reachable from Field int androidx.core.R$id.accessibility_custom_action_5
-id:view_tree_saved_state_registry_owner:2131296491 reachable from Field int androidx.savedstate.R$id.view_tree_saved_state_registry_owner
-id:accessibility_custom_action_6:2131296291 reachable from Field int androidx.core.R$id.accessibility_custom_action_6
-string:animation_speed:2131689502 reachable from Field int com.rpn.blockblaster.R$string.animation_speed
-id:accessibility_custom_action_7:2131296292 reachable from Field int androidx.core.R$id.accessibility_custom_action_7
-id:accessibility_custom_action_8:2131296293 reachable from Field int androidx.core.R$id.accessibility_custom_action_8
-id:accessibility_custom_action_9:2131296294 reachable from Field int androidx.core.R$id.accessibility_custom_action_9
-string:show_grid:2131689680 reachable from Field int com.rpn.blockblaster.R$string.show_grid
-id:accessibility_custom_action_0:2131296263 reachable from Field int androidx.core.R$id.accessibility_custom_action_0
-raw:perfect_clear:2131623944 reachable from Field int com.rpn.blockblaster.R$raw.perfect_clear
-id:accessibility_custom_action_1:2131296264 reachable from Field int androidx.core.R$id.accessibility_custom_action_1
-id:accessibility_custom_action_2:2131296275 reachable from Field int androidx.core.R$id.accessibility_custom_action_2
-drawable:offline_dialog_background:2131165323 reachable from res/layout/offline_ads_dialog.xml
-id:wrapped_composition_tag:2131296497 reachable from Field int androidx.compose.ui.R$id.wrapped_composition_tag
-attr:adSizes:2130903080 reachable from Field int[] com.google.android.gms.ads.R$styleable.AdsAttrs
-drawable:common_full_open_on_phone:2131165279 reachable from Field int com.google.android.gms.base.R$drawable.common_full_open_on_phone
-string:google_crash_reporting_api_key:2131689553 reachable from Field int com.rpn.blockblaster.R$string.google_crash_reporting_api_key
-string:switch_role:2131689688 reachable from Field int androidx.compose.ui.R$string.switch_role
-id:androidx_compose_ui_view_compose_view_context:2131296322 reachable from Field int androidx.compose.ui.R$id.androidx_compose_ui_view_compose_view_context
-bool:enable_system_foreground_service_default:2130968579 reachable from AndroidManifest.xml
-drawable:compat_splash_screen_no_icon_background:2131165299 reachable from style:Theme_SplashScreen_Common:2131755289
-mipmap:ic_launcher:2131558400 reachable from AndroidManifest.xml
-raw:game_over:2131623942 reachable from Field int com.rpn.blockblaster.R$raw.game_over
-string:restart:2131689665 reachable from Field int com.rpn.blockblaster.R$string.restart
-string:offline_opt_in_decline:2131689655 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_opt_in_decline
-dimen:splashscreen_icon_mask_stroke_no_background:2131099764 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
-string:app_name:2131689503 reachable from AndroidManifest.xml
-string:selected:2131689677 reachable from Field int androidx.compose.ui.R$string.selected
-style:Base_v27_Theme_SplashScreen:2131755174 reachable from style:Base_Theme_SplashScreen:2131755082
-id:androidx_compose_ui_view_composition_context:2131296323 reachable from Field int androidx.compose.ui.R$id.androidx_compose_ui_view_composition_context
-string:revive:2131689667 reachable from Field int com.rpn.blockblaster.R$string.revive
-drawable:offline_dialog_default_icon_42dp:2131165324 reachable from res/layout/offline_ads_dialog.xml
-string:settings:2131689678 reachable from Field int com.rpn.blockblaster.R$string.settings
-id:view_tree_disjoint_parent:2131296487 reachable from Field int androidx.core.viewtree.R$id.view_tree_disjoint_parent
-bool:workmanager_test_configuration:2130968581 reachable from Field int androidx.work.R$bool.workmanager_test_configuration
-style:Base_Theme_SplashScreen_DayNight:2131755083 reachable from style:Theme_SplashScreen_Common:2131755289
 animator:fragment_fade_exit:2130837507 reachable from Field int androidx.fragment.R$animator.fragment_fade_exit
-color:background_secondary:2131034147 reachable from Field int com.rpn.blockblaster.R$color.background_secondary
-style:Theme_SplashScreen_Common:2131755289 reachable from style:Theme_SplashScreen:2131755288
+id:compose_view_saveable_id_tag:2131296345 reachable from Field int androidx.compose.ui.R$id.compose_view_saveable_id_tag
+dimen:compat_notification_large_icon_max_height:2131099736 reachable from Field int androidx.core.R$dimen.compat_notification_large_icon_max_height
+string:common_google_play_services_enable_title:2131689522 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_enable_title
+string:common_google_play_services_notification_channel_name:2131689526 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_notification_channel_name
+id:fragment_container_view_tag:2131296364 reachable from Field int androidx.fragment.R$id.fragment_container_view_tag
+string:restart:2131689667 reachable from Field int com.rpn.blockblaster.R$string.restart
+id:transition_pause_alpha:2131296479 reachable from Field int androidx.transition.R$id.transition_pause_alpha
+string:common_google_play_services_enable_text:2131689521 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_enable_text
+string:google_crash_reporting_api_key:2131689553 reachable from Field int com.rpn.blockblaster.R$string.google_crash_reporting_api_key
+color:white:2131034223 reachable from Field int com.rpn.blockblaster.R$color.white
+id:visible_removing_fragment_view_tag:2131296493 reachable from Field int androidx.fragment.R$id.visible_removing_fragment_view_tag
+animator:fragment_open_exit:2130837509 reachable from Field int androidx.fragment.R$animator.fragment_open_exit
+style:Theme_Games_Transparent:2131755287 reachable from AndroidManifest.xml
+string:settings:2131689680 reachable from Field int com.rpn.blockblaster.R$string.settings
+string:native_media_view:2131689643 reachable from Field int com.google.android.gms.ads.impl.R$string.native_media_view
+id:consume_window_insets_tag:2131296346 reachable from Field int androidx.compose.ui.R$id.consume_window_insets_tag
+string:common_google_play_services_unknown_issue:2131689528 reachable from Field int com.google.android.gms.common.R$string.common_google_play_services_unknown_issue
+id:report_drawn:2131296412 reachable from Field int androidx.activity.R$id.report_drawn
+id:androidx_compose_ui_view_composition_context:2131296323 reachable from Field int androidx.compose.ui.R$id.androidx_compose_ui_view_composition_context
+string:show_grid:2131689682 reachable from Field int com.rpn.blockblaster.R$string.show_grid
+attr:windowSplashScreenAnimatedIcon:2130903393 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
+attr:fontProviderFetchStrategy:2130903200 reachable from Field int[] androidx.core.R$styleable.FontFamily
+id:view_tree_disjoint_parent:2131296487 reachable from Field int androidx.core.viewtree.R$id.view_tree_disjoint_parent
+id:layout:2131296383 reachable from res/layout/admob_empty_layout.xml
+string:paused:2131689658 reachable from Field int com.rpn.blockblaster.R$string.paused
+style:Theme_SplashScreen_Common:2131755291 reachable from style:Theme_SplashScreen:2131755290
+style:Base_Theme_SplashScreen_DayNight:2131755083 reachable from style:Theme_SplashScreen_Common:2131755291
+string:androidx_startup:2131689501 reachable from Field int androidx.startup.R$string.androidx_startup
+id:hide_graphics_layer_in_inspector_tag:2131296368 reachable from Field int androidx.compose.ui.graphics.R$id.hide_graphics_layer_in_inspector_tag
+raw:button_click:2131623938 reachable from Field int com.rpn.blockblaster.R$raw.button_click
+drawable:avd_splash_screen:2131165270 reachable from style:Theme_BlockBlaster_Splash:2131755286
+string:offline_opt_in_confirm:2131689654 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_opt_in_confirm
+id:androidx_compose_ui_view_compose_view_context:2131296322 reachable from Field int androidx.compose.ui.R$id.androidx_compose_ui_view_compose_view_context
+string:sound_effects:2131689684 reachable from Field int com.rpn.blockblaster.R$string.sound_effects
+string:offline_opt_in_title:2131689657 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_opt_in_title
+xml:data_extraction_rules:2131886081 reachable from AndroidManifest.xml
+id:auto_clear_focus_behavior_tag:2131296327 reachable from Field int androidx.compose.ui.R$id.auto_clear_focus_behavior_tag
+string:common_google_play_services_update_title:2131689532 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_update_title
+drawable:admob_close_button_white_cross:2131165269 reachable from Field int com.google.android.gms.ads.impl.R$drawable.admob_close_button_white_cross
+string:common_google_play_services_update_button:2131689530 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_update_button
+string:play_again:2131689661 reachable from Field int com.rpn.blockblaster.R$string.play_again
+string:common_google_play_services_enable_button:2131689520 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_enable_button
+bool:enable_system_foreground_service_default:2130968579 reachable from AndroidManifest.xml
+drawable:abc_vector_test:2131165266 reachable from Field int androidx.appcompat.resources.R$drawable.abc_vector_test
+id:transition_current_scene:2131296476 reachable from Field int androidx.transition.R$id.transition_current_scene
+style:DialogWindowTheme:2131755176 reachable from Field int androidx.compose.ui.R$style.DialogWindowTheme
+string:google_api_key:2131689551 reachable from keep xml file
+string:best_score:2131689507 reachable from Field int com.rpn.blockblaster.R$string.best_score
+attr:ttcIndex:2130903379 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
+raw:combo:2131623939 reachable from Field int com.rpn.blockblaster.R$raw.combo
+style:Base_v21_Theme_SplashScreen_Light:2131755173 reachable from style:Base_Theme_SplashScreen_Light:2131755084
+attr:fontStyle:2130903205 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
 string:perfect:2131689659 reachable from Field int com.rpn.blockblaster.R$string.perfect
-string:tab:2131689689 reachable from Field int androidx.compose.ui.R$string.tab
+string:indeterminate:2131689557 reachable from Field int androidx.compose.ui.R$string.indeterminate
+drawable:offline_dialog_default_icon_42dp:2131165324 reachable from res/layout/offline_ads_dialog.xml
+string:app_name:2131689503 reachable from AndroidManifest.xml
+animator:fragment_fade_enter:2130837506 reachable from Field int androidx.fragment.R$animator.fragment_fade_enter
+attr:fontProviderAuthority:2130903197 reachable from Field int[] androidx.core.R$styleable.FontFamily
+string:native_headline:2131689642 reachable from Field int com.google.android.gms.ads.impl.R$string.native_headline
+string:best_combo:2131689506 reachable from Field int com.rpn.blockblaster.R$string.best_combo
+id:tag_accessibility_clickable_spans:2131296450 reachable from Field int androidx.core.R$id.tag_accessibility_clickable_spans
+id:coil3_request_manager:2131296342 reachable from Field int coil3.core.R$id.coil3_request_manager
+string:new_best:2131689645 reachable from Field int com.rpn.blockblaster.R$string.new_best
+string:your_score:2131689699 reachable from Field int com.rpn.blockblaster.R$string.your_score
+id:accessibility_action_clickable_span:2131296262 reachable from Field int androidx.core.R$id.accessibility_action_clickable_span
+id:tag_window_insets_animation_callback:2131296463 reachable from Field int androidx.core.R$id.tag_window_insets_animation_callback
+integer:default_icon_animation_duration:2131361796 reachable from style:Theme_SplashScreen:2131755290
+string:common_google_play_services_notification_ticker:2131689527 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_notification_ticker
+string:common_google_play_services_install_button:2131689523 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_install_button
+string:play_games_sdk_version:2131689663 reachable from AndroidManifest.xml
+id:tag_state_description:2131296458 reachable from Field int androidx.core.R$id.tag_state_description
+string:play:2131689660 reachable from Field int com.rpn.blockblaster.R$string.play
+string:stats:2131689688 reachable from Field int com.rpn.blockblaster.R$string.stats
+string:blocks_placed:2131689508 reachable from Field int com.rpn.blockblaster.R$string.blocks_placed
+font:bold_primetime:2131230720 reachable from Field int com.rpn.blockblaster.R$font.bold_primetime
+attr:fontProviderFallbackQuery:2130903199 reachable from Field int[] androidx.core.R$styleable.FontFamily
+id:hide_in_inspector_tag:2131296370 reachable from Field int androidx.compose.ui.R$id.hide_in_inspector_tag
+color:background_secondary:2131034147 reachable from Field int com.rpn.blockblaster.R$color.background_secondary
+integer:google_play_services_version:2131361797 reachable from AndroidManifest.xml
+attr:fontProviderCerts:2130903198 reachable from Field int[] androidx.core.R$styleable.FontFamily
+drawable:common_full_open_on_phone:2131165279 reachable from Field int com.google.android.gms.base.R$drawable.common_full_open_on_phone
+style:Base_v27_Theme_SplashScreen:2131755174 reachable from style:Base_Theme_SplashScreen:2131755082
+color:ic_launcher_background:2131034184 reachable from res/mipmap-anydpi-v26/ic_launcher.xml
+anim:fragment_fast_out_extra_slow_in:2130771992 reachable from res/animator/fragment_close_enter.xml
+attr:adSizes:2130903080 reachable from Field int[] com.google.android.gms.ads.R$styleable.AdsAttrs
+mipmap:ic_launcher:2131558400 reachable from AndroidManifest.xml
+id:offline_dialog_text:2131296404 reachable from res/layout/offline_ads_dialog.xml
+mipmap:ic_launcher_foreground:2131558401 reachable from res/mipmap-anydpi-v26/ic_launcher.xml
+attr:font:2130903195 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
+string:combo:2131689519 reachable from Field int com.rpn.blockblaster.R$string.combo
+string:native_body:2131689641 reachable from Field int com.google.android.gms.ads.impl.R$string.native_body
+id:wrapped_composition_tag:2131296497 reachable from Field int androidx.compose.ui.R$id.wrapped_composition_tag
+id:accessibility_custom_action_9:2131296294 reachable from Field int androidx.core.R$id.accessibility_custom_action_9
+id:accessibility_custom_action_8:2131296293 reachable from Field int androidx.core.R$id.accessibility_custom_action_8
+id:accessibility_custom_action_3:2131296286 reachable from Field int androidx.core.R$id.accessibility_custom_action_3
+id:accessibility_custom_action_2:2131296275 reachable from Field int androidx.core.R$id.accessibility_custom_action_2
+raw:game_over:2131623942 reachable from Field int com.rpn.blockblaster.R$raw.game_over
+id:accessibility_custom_action_1:2131296264 reachable from Field int androidx.core.R$id.accessibility_custom_action_1
+string:in_progress:2131689556 reachable from Field int androidx.compose.ui.R$string.in_progress
+id:accessibility_custom_action_0:2131296263 reachable from Field int androidx.core.R$id.accessibility_custom_action_0
+string:offline_notification_title_with_advertiser:2131689653 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_notification_title_with_advertiser
+id:accessibility_custom_action_7:2131296292 reachable from Field int androidx.core.R$id.accessibility_custom_action_7
+id:accessibility_custom_action_6:2131296291 reachable from Field int androidx.core.R$id.accessibility_custom_action_6
+id:accessibility_custom_action_5:2131296290 reachable from Field int androidx.core.R$id.accessibility_custom_action_5
+id:accessibility_custom_action_4:2131296289 reachable from Field int androidx.core.R$id.accessibility_custom_action_4
+string:keep_playing:2131689558 reachable from Field int com.rpn.blockblaster.R$string.keep_playing
+style:Base_Theme_SplashScreen:2131755082 reachable from style:Base_Theme_SplashScreen_Light:2131755084
+string:give_up:2131689550 reachable from Field int com.rpn.blockblaster.R$string.give_up
+string:score:2131689677 reachable from Field int com.rpn.blockblaster.R$string.score
+attr:postSplashScreenTheme:2130903278 reachable from style:Theme_SplashScreen:2131755290
+string:home:2131689555 reachable from Field int com.rpn.blockblaster.R$string.home
+string:lines_blasted:2131689559 reachable from Field int com.rpn.blockblaster.R$string.lines_blasted
+drawable:$avd_splash_screen__3:2131165187 reachable from res/drawable/avd_splash_screen.xml
+drawable:$avd_splash_screen__2:2131165186 reachable from res/drawable/avd_splash_screen.xml
+drawable:$avd_splash_screen__1:2131165185 reachable from res/drawable/avd_splash_screen.xml
+drawable:$avd_splash_screen__0:2131165184 reachable from res/drawable/avd_splash_screen.xml
+string:offline_notification_title:2131689652 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_notification_title
+attr:splashScreenIconSize:2130903310 reachable from style:Theme_SplashScreen_Common:2131755291
+id:accessibility_custom_action_21:2131296277 reachable from Field int androidx.core.R$id.accessibility_custom_action_21
+id:accessibility_custom_action_20:2131296276 reachable from Field int androidx.core.R$id.accessibility_custom_action_20
+id:view_tree_saved_state_registry_owner:2131296491 reachable from Field int androidx.savedstate.R$id.view_tree_saved_state_registry_owner
+string:selected:2131689679 reachable from Field int androidx.compose.ui.R$string.selected
+id:accessibility_custom_action_27:2131296283 reachable from Field int androidx.core.R$id.accessibility_custom_action_27
+string:tab:2131689691 reachable from Field int androidx.compose.ui.R$string.tab
+id:accessibility_custom_action_26:2131296282 reachable from Field int androidx.core.R$id.accessibility_custom_action_26
+id:accessibility_custom_action_29:2131296285 reachable from Field int androidx.core.R$id.accessibility_custom_action_29
+id:accessibility_custom_action_28:2131296284 reachable from Field int androidx.core.R$id.accessibility_custom_action_28
+id:accessibility_custom_action_23:2131296279 reachable from Field int androidx.core.R$id.accessibility_custom_action_23
+id:accessibility_custom_action_22:2131296278 reachable from Field int androidx.core.R$id.accessibility_custom_action_22
+raw:invalid:2131623943 reachable from Field int com.rpn.blockblaster.R$raw.invalid
+id:accessibility_custom_action_25:2131296281 reachable from Field int androidx.core.R$id.accessibility_custom_action_25
+string:notifications_permission_title:2131689649 reachable from Field int com.google.android.gms.ads.impl.R$string.notifications_permission_title
+id:accessibility_custom_action_24:2131296280 reachable from Field int androidx.core.R$id.accessibility_custom_action_24
+id:tag_compat_insets_dispatch:2131296453 reachable from Field int androidx.core.R$id.tag_compat_insets_dispatch
+string:common_google_play_services_unsupported_text:2131689529 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_unsupported_text
+font:boldonse:2131230721 reachable from Field int com.rpn.blockblaster.R$font.boldonse
+attr:windowSplashScreenBackground:2130903395 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
+id:accessibility_custom_action_19:2131296274 reachable from Field int androidx.core.R$id.accessibility_custom_action_19
+id:offline_dialog_image:2131296403 reachable from res/layout/offline_ads_dialog.xml
+string:notifications_permission_confirm:2131689647 reachable from Field int com.google.android.gms.ads.impl.R$string.notifications_permission_confirm
+string:common_google_play_services_install_title:2131689525 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_install_title
+drawable:admob_close_button_black_circle_white_cross:2131165267 reachable from Field int com.google.android.gms.ads.impl.R$drawable.admob_close_button_black_circle_white_cross
+bool:enable_system_job_service_default:2130968580 reachable from AndroidManifest.xml
+string:gcm_defaultSenderId:2131689549 reachable from keep xml file
+string:state_on:2131689687 reachable from Field int androidx.compose.ui.R$string.state_on
+id:accessibility_custom_action_10:2131296265 reachable from Field int androidx.core.R$id.accessibility_custom_action_10
+id:tag_accessibility_heading:2131296451 reachable from Field int androidx.core.R$id.tag_accessibility_heading
+string:drop_it_like:2131689543 reachable from Field int com.rpn.blockblaster.R$string.drop_it_like
+id:is_pooling_container_tag:2131296380 reachable from Field int androidx.customview.poolingcontainer.R$id.is_pooling_container_tag
+string:common_google_play_services_wear_update_text:2131689534 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_wear_update_text
+id:view_tree_lifecycle_owner:2131296488 reachable from Field int androidx.lifecycle.runtime.R$id.view_tree_lifecycle_owner
+id:accessibility_custom_action_16:2131296271 reachable from Field int androidx.core.R$id.accessibility_custom_action_16
+id:accessibility_custom_action_15:2131296270 reachable from Field int androidx.core.R$id.accessibility_custom_action_15
+id:accessibility_custom_action_18:2131296273 reachable from Field int androidx.core.R$id.accessibility_custom_action_18
+id:inspection_slot_table_set:2131296379 reachable from Field int androidx.compose.ui.R$id.inspection_slot_table_set
+attr:fontVariationSettings:2130903206 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
+id:accessibility_custom_action_17:2131296272 reachable from Field int androidx.core.R$id.accessibility_custom_action_17
+id:accessibility_custom_action_12:2131296267 reachable from Field int androidx.core.R$id.accessibility_custom_action_12
+id:accessibility_custom_action_11:2131296266 reachable from Field int androidx.core.R$id.accessibility_custom_action_11
+id:accessibility_custom_action_14:2131296269 reachable from Field int androidx.core.R$id.accessibility_custom_action_14
+id:accessibility_custom_action_13:2131296268 reachable from Field int androidx.core.R$id.accessibility_custom_action_13
+string:google_storage_bucket:2131689554 reachable from keep xml file
+raw:cross_blast:2131623940 reachable from Field int com.rpn.blockblaster.R$raw.cross_blast
+string:animation_speed:2131689502 reachable from Field int com.rpn.blockblaster.R$string.animation_speed
+bool:workmanager_test_configuration:2130968581 reachable from Field int androidx.work.R$bool.workmanager_test_configuration
+id:tag_unhandled_key_event_manager:2131296461 reachable from Field int androidx.core.R$id.tag_unhandled_key_event_manager
+style:Theme_BlockBlaster:2131755285 reachable from style:Theme_BlockBlaster_Splash:2131755286
+style:Theme_BlockBlaster_Splash:2131755286 reachable from AndroidManifest.xml
+string:state_empty:2131689685 reachable from Field int androidx.compose.ui.R$string.state_empty
+style:Base_v21_Theme_SplashScreen:2131755172 reachable from style:Base_Theme_SplashScreen:2131755082
+id:tag_accessibility_actions:2131296449 reachable from Field int androidx.core.R$id.tag_accessibility_actions
+string:common_google_play_services_install_text:2131689524 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_install_text
+dimen:compat_notification_large_icon_max_width:2131099737 reachable from Field int androidx.core.R$dimen.compat_notification_large_icon_max_width
+attr:adUnitId:2130903081 reachable from Field int[] com.google.android.gms.ads.R$styleable.AdsAttrs
+id:view_tree_navigation_event_dispatcher_owner:2131296489 reachable from Field int androidx.navigationevent.R$id.view_tree_navigation_event_dispatcher_owner
+layout:offline_ads_dialog:2131492904 reachable from Field int com.google.android.gms.ads.impl.R$layout.offline_ads_dialog
+string:resume:2131689668 reachable from Field int com.rpn.blockblaster.R$string.resume
+string:not_selected:2131689646 reachable from Field int androidx.compose.ui.R$string.not_selected
+raw:perfect_clear:2131623944 reachable from Field int com.rpn.blockblaster.R$raw.perfect_clear
+string:offline_opt_in_decline:2131689655 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_opt_in_decline
+id:pooling_container_listener_holder_tag:2131296408 reachable from Field int androidx.customview.poolingcontainer.R$id.pooling_container_listener_holder_tag
+attr:fontProviderPackage:2130903202 reachable from Field int[] androidx.core.R$styleable.FontFamily
+string:vibration:2131689697 reachable from Field int com.rpn.blockblaster.R$string.vibration
+drawable:ic_launcher_background:2131165308 reachable from Field int com.rpn.blockblaster.R$drawable.ic_launcher_background
+animator:fragment_open_enter:2130837508 reachable from Field int androidx.fragment.R$animator.fragment_open_enter
+style:Base_Theme_SplashScreen_Light:2131755084 reachable from style:Base_Theme_SplashScreen_DayNight:2131755083
+dimen:splashscreen_icon_size_no_background:2131099767 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
+string:share_score:2131689681 reachable from Field int com.rpn.blockblaster.R$string.share_score
+string:game_over:2131689548 reachable from Field int com.rpn.blockblaster.R$string.game_over
+attr:adSize:2130903079 reachable from Field int[] com.google.android.gms.ads.R$styleable.AdsAttrs
+string:cross_blasts:2131689539 reachable from Field int com.rpn.blockblaster.R$string.cross_blasts
+layout:admob_empty_layout:2131492892 reachable from Field int com.google.android.gms.ads.R$layout.admob_empty_layout
+attr:fontProviderFetchTimeout:2130903201 reachable from Field int[] androidx.core.R$styleable.FontFamily
+id:special_effects_controller_view_tag:2131296438 reachable from Field int androidx.fragment.R$id.special_effects_controller_view_tag
+animator:fragment_close_exit:2130837505 reachable from Field int androidx.fragment.R$animator.fragment_close_exit
+color:gold:2131034181 reachable from Field int com.rpn.blockblaster.R$color.gold
+id:tag_system_bar_state_monitor:2131296459 reachable from Field int androidx.core.R$id.tag_system_bar_state_monitor
+string:project_id:2131689664 reachable from keep xml file
+drawable:offline_dialog_background:2131165323 reachable from res/layout/offline_ads_dialog.xml
+string:switch_role:2131689690 reachable from Field int androidx.compose.ui.R$string.switch_role
+string:common_open_on_phone:2131689535 reachable from Field int com.google.android.gms.base.R$string.common_open_on_phone
+style:Base_v27_Theme_SplashScreen_Light:2131755175 reachable from style:Base_Theme_SplashScreen_Light:2131755084
+id:tag_on_apply_window_listener:2131296454 reachable from Field int androidx.core.R$id.tag_on_apply_window_listener
+attr:fontProviderQuery:2130903203 reachable from Field int[] androidx.core.R$styleable.FontFamily
+id:tag_accessibility_pane_title:2131296452 reachable from Field int androidx.core.R$id.tag_accessibility_pane_title
+string:template_percent:2131689692 reachable from Field int androidx.compose.ui.R$string.template_percent
+attr:fontProviderSystemFontFamily:2130903204 reachable from Field int[] androidx.core.R$styleable.FontFamily
+string:s1:2131689670 reachable from Field int com.google.android.gms.ads.impl.R$string.s1
+string:s2:2131689671 reachable from Field int com.google.android.gms.ads.impl.R$string.s2
+string:s3:2131689672 reachable from Field int com.google.android.gms.ads.impl.R$string.s3
+string:s4:2131689673 reachable from Field int com.google.android.gms.ads.impl.R$string.s4
+style:Theme_SplashScreen:2131755290 reachable from style:Theme_BlockBlaster_Splash:2131755286
+string:s5:2131689674 reachable from Field int com.google.android.gms.ads.impl.R$string.s5
+attr:fontWeight:2130903207 reachable from Field int[] androidx.core.R$styleable.FontFamilyFont
+string:common_google_play_services_update_text:2131689531 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_update_text
+string:play_games_app_id:2131689662 reachable from Field int com.rpn.blockblaster.R$string.play_games_app_id
+id:transition_clip:2131296475 reachable from Field int androidx.transition.R$id.transition_clip
+string:revive:2131689669 reachable from Field int com.rpn.blockblaster.R$string.revive
+string:state_off:2131689686 reachable from Field int androidx.compose.ui.R$string.state_off
+string:s6:2131689675 reachable from Field int com.google.android.gms.ads.impl.R$string.s6
+string:s7:2131689676 reachable from Field int com.google.android.gms.ads.impl.R$string.s7
+string:common_google_play_services_updating_text:2131689533 reachable from Field int com.google.android.gms.base.R$string.common_google_play_services_updating_text
+drawable:compat_splash_screen_no_icon_background:2131165299 reachable from style:Theme_SplashScreen_Common:2131755291
+string:watermark_label_prefix:2131689698 reachable from Field int com.google.android.gms.ads.impl.R$string.watermark_label_prefix
+string:theme:2131689693 reachable from Field int com.rpn.blockblaster.R$string.theme
+string:google_app_id:2131689552 reachable from keep xml file
+style:FloatingDialogWindowTheme:2131755179 reachable from Field int androidx.compose.ui.R$style.FloatingDialogWindowTheme
+raw:block_place:2131623937 reachable from Field int com.rpn.blockblaster.R$raw.block_place
+id:offline_dialog_advertiser_name:2131296402 reachable from res/layout/offline_ads_dialog.xml
+string:version:2131689696 reachable from Field int com.rpn.blockblaster.R$string.version
+string:offline_opt_in_message:2131689656 reachable from Field int com.google.android.gms.ads.impl.R$string.offline_opt_in_message
+string:background_music:2131689504 reachable from Field int com.rpn.blockblaster.R$string.background_music
+xml:backup_rules:2131886080 reachable from AndroidManifest.xml
+string:daily_challenge:2131689540 reachable from Field int com.rpn.blockblaster.R$string.daily_challenge
+string:offline_dialog_text:2131689651 reachable from from dex
+mipmap:ic_launcher_round:2131558402 reachable from AndroidManifest.xml
+string:offline_dialog_image_description:2131689650 reachable from res/layout/offline_ads_dialog.xml
+id:view_tree_on_back_pressed_dispatcher_owner:2131296490 reachable from Field int androidx.activity.R$id.view_tree_on_back_pressed_dispatcher_owner
+string:clear_best_score:2131689516 reachable from Field int com.rpn.blockblaster.R$string.clear_best_score
+attr:isLightTheme:2130903225 reachable from style:Base_v21_Theme_SplashScreen_Light:2131755173
+style:Theme_PlayCore_Transparent:2131755289 reachable from AndroidManifest.xml
+id:tag_screen_reader_focusable:2131296457 reachable from Field int androidx.core.R$id.tag_screen_reader_focusable
+animator:fragment_close_enter:2130837504 reachable from Field int androidx.fragment.R$animator.fragment_close_enter
+attr:windowSplashScreenAnimationDuration:2130903394 reachable from style:Theme_SplashScreen:2131755290
+drawable:admob_close_button_white_circle_black_cross:2131165268 reachable from Field int com.google.android.gms.ads.impl.R$drawable.admob_close_button_white_circle_black_cross
+dimen:splashscreen_icon_mask_stroke_no_background:2131099764 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
+dimen:splashscreen_icon_size_with_background:2131099768 reachable from Field int androidx.core.splashscreen.R$dimen.splashscreen_icon_size_with_background
+color:background_dark:2131034142 reachable from Field int com.rpn.blockblaster.R$color.background_dark
+id:accessibility_custom_action_30:2131296287 reachable from Field int androidx.core.R$id.accessibility_custom_action_30
+id:save_overlay_view:2131296417 reachable from Field int androidx.transition.R$id.save_overlay_view
+id:tag_unhandled_key_listeners:2131296462 reachable from Field int androidx.core.R$id.tag_unhandled_key_listeners
+id:accessibility_custom_action_31:2131296288 reachable from Field int androidx.core.R$id.accessibility_custom_action_31
+dimen:splashscreen_icon_mask_size_no_background:2131099762 reachable from res/drawable-v23/compat_splash_screen_no_icon_background.xml
+string:best:2131689505 reachable from Field int com.rpn.blockblaster.R$string.best
+raw:revive:2131623945 reachable from Field int com.rpn.blockblaster.R$raw.revive
+color:accent:2131034137 reachable from Field int com.rpn.blockblaster.R$color.accent
+id:view_tree_view_model_store_owner:2131296492 reachable from Field int androidx.lifecycle.viewmodel.R$id.view_tree_view_model_store_owner
+raw:blast:2131623936 reachable from Field int com.rpn.blockblaster.R$raw.blast
 anim:abc_fade_in:2130771968 is not reachable.
 anim:abc_fade_out:2130771969 is not reachable.
 anim:abc_grow_fade_in_from_bottom:2130771970 is not reachable.
@@ -1172,13 +1177,13 @@ string:m3c_tooltip_pane_description:2131689638 is not reachable.
 string:m3c_wide_navigation_rail_close_rail:2131689639 is not reachable.
 string:m3c_wide_navigation_rail_pane_title:2131689640 is not reachable.
 string:navigation_menu:2131689644 is not reachable.
-string:range_end:2131689663 is not reachable.
-string:range_start:2131689664 is not reachable.
-string:search_menu_title:2131689676 is not reachable.
-string:snackbar_pane_title:2131689681 is not reachable.
-string:status_bar_notification_info_overflow:2131689687 is not reachable.
-string:tooltip_description:2131689692 is not reachable.
-string:tooltip_label:2131689693 is not reachable.
+string:range_end:2131689665 is not reachable.
+string:range_start:2131689666 is not reachable.
+string:search_menu_title:2131689678 is not reachable.
+string:snackbar_pane_title:2131689683 is not reachable.
+string:status_bar_notification_info_overflow:2131689689 is not reachable.
+string:tooltip_description:2131689694 is not reachable.
+string:tooltip_label:2131689695 is not reachable.
 style:AlertDialog_AppCompat:2131755008 is not reachable.
 style:AlertDialog_AppCompat_Light:2131755009 is not reachable.
 style:Animation_AppCompat_Dialog:2131755010 is not reachable.
@@ -1447,92 +1452,92 @@ style:Theme_AppCompat_Light_Dialog_MinWidth:2131755281 is not reachable.
 style:Theme_AppCompat_Light_DialogWhenLarge:2131755282 is not reachable.
 style:Theme_AppCompat_Light_NoActionBar:2131755283 is not reachable.
 style:Theme_AppCompat_NoActionBar:2131755284 is not reachable.
-style:Theme_IAPTheme:2131755287 is not reachable.
-style:Theme_SplashScreen_IconBackground:2131755290 is not reachable.
-style:ThemeOverlay_AppCompat:2131755291 is not reachable.
-style:ThemeOverlay_AppCompat_ActionBar:2131755292 is not reachable.
-style:ThemeOverlay_AppCompat_Dark:2131755293 is not reachable.
-style:ThemeOverlay_AppCompat_Dark_ActionBar:2131755294 is not reachable.
-style:ThemeOverlay_AppCompat_DayNight:2131755295 is not reachable.
-style:ThemeOverlay_AppCompat_DayNight_ActionBar:2131755296 is not reachable.
-style:ThemeOverlay_AppCompat_Dialog:2131755297 is not reachable.
-style:ThemeOverlay_AppCompat_Dialog_Alert:2131755298 is not reachable.
-style:ThemeOverlay_AppCompat_Light:2131755299 is not reachable.
-style:Widget_AppCompat_ActionBar:2131755300 is not reachable.
-style:Widget_AppCompat_ActionBar_Solid:2131755301 is not reachable.
-style:Widget_AppCompat_ActionBar_TabBar:2131755302 is not reachable.
-style:Widget_AppCompat_ActionBar_TabText:2131755303 is not reachable.
-style:Widget_AppCompat_ActionBar_TabView:2131755304 is not reachable.
-style:Widget_AppCompat_ActionButton:2131755305 is not reachable.
-style:Widget_AppCompat_ActionButton_CloseMode:2131755306 is not reachable.
-style:Widget_AppCompat_ActionButton_Overflow:2131755307 is not reachable.
-style:Widget_AppCompat_ActionMode:2131755308 is not reachable.
-style:Widget_AppCompat_ActivityChooserView:2131755309 is not reachable.
-style:Widget_AppCompat_AutoCompleteTextView:2131755310 is not reachable.
-style:Widget_AppCompat_Button:2131755311 is not reachable.
-style:Widget_AppCompat_Button_Borderless:2131755312 is not reachable.
-style:Widget_AppCompat_Button_Borderless_Colored:2131755313 is not reachable.
-style:Widget_AppCompat_Button_ButtonBar_AlertDialog:2131755314 is not reachable.
-style:Widget_AppCompat_Button_Colored:2131755315 is not reachable.
-style:Widget_AppCompat_Button_Small:2131755316 is not reachable.
-style:Widget_AppCompat_ButtonBar:2131755317 is not reachable.
-style:Widget_AppCompat_ButtonBar_AlertDialog:2131755318 is not reachable.
-style:Widget_AppCompat_CompoundButton_CheckBox:2131755319 is not reachable.
-style:Widget_AppCompat_CompoundButton_RadioButton:2131755320 is not reachable.
-style:Widget_AppCompat_CompoundButton_Switch:2131755321 is not reachable.
-style:Widget_AppCompat_DrawerArrowToggle:2131755322 is not reachable.
-style:Widget_AppCompat_DropDownItem_Spinner:2131755323 is not reachable.
-style:Widget_AppCompat_EditText:2131755324 is not reachable.
-style:Widget_AppCompat_ImageButton:2131755325 is not reachable.
-style:Widget_AppCompat_Light_ActionBar:2131755326 is not reachable.
-style:Widget_AppCompat_Light_ActionBar_Solid:2131755327 is not reachable.
-style:Widget_AppCompat_Light_ActionBar_Solid_Inverse:2131755328 is not reachable.
-style:Widget_AppCompat_Light_ActionBar_TabBar:2131755329 is not reachable.
-style:Widget_AppCompat_Light_ActionBar_TabBar_Inverse:2131755330 is not reachable.
-style:Widget_AppCompat_Light_ActionBar_TabText:2131755331 is not reachable.
-style:Widget_AppCompat_Light_ActionBar_TabText_Inverse:2131755332 is not reachable.
-style:Widget_AppCompat_Light_ActionBar_TabView:2131755333 is not reachable.
-style:Widget_AppCompat_Light_ActionBar_TabView_Inverse:2131755334 is not reachable.
-style:Widget_AppCompat_Light_ActionButton:2131755335 is not reachable.
-style:Widget_AppCompat_Light_ActionButton_CloseMode:2131755336 is not reachable.
-style:Widget_AppCompat_Light_ActionButton_Overflow:2131755337 is not reachable.
-style:Widget_AppCompat_Light_ActionMode_Inverse:2131755338 is not reachable.
-style:Widget_AppCompat_Light_ActivityChooserView:2131755339 is not reachable.
-style:Widget_AppCompat_Light_AutoCompleteTextView:2131755340 is not reachable.
-style:Widget_AppCompat_Light_DropDownItem_Spinner:2131755341 is not reachable.
-style:Widget_AppCompat_Light_ListPopupWindow:2131755342 is not reachable.
-style:Widget_AppCompat_Light_ListView_DropDown:2131755343 is not reachable.
-style:Widget_AppCompat_Light_PopupMenu:2131755344 is not reachable.
-style:Widget_AppCompat_Light_PopupMenu_Overflow:2131755345 is not reachable.
-style:Widget_AppCompat_Light_SearchView:2131755346 is not reachable.
-style:Widget_AppCompat_Light_Spinner_DropDown_ActionBar:2131755347 is not reachable.
-style:Widget_AppCompat_ListMenuView:2131755348 is not reachable.
-style:Widget_AppCompat_ListPopupWindow:2131755349 is not reachable.
-style:Widget_AppCompat_ListView:2131755350 is not reachable.
-style:Widget_AppCompat_ListView_DropDown:2131755351 is not reachable.
-style:Widget_AppCompat_ListView_Menu:2131755352 is not reachable.
-style:Widget_AppCompat_PopupMenu:2131755353 is not reachable.
-style:Widget_AppCompat_PopupMenu_Overflow:2131755354 is not reachable.
-style:Widget_AppCompat_PopupWindow:2131755355 is not reachable.
-style:Widget_AppCompat_ProgressBar:2131755356 is not reachable.
-style:Widget_AppCompat_ProgressBar_Horizontal:2131755357 is not reachable.
-style:Widget_AppCompat_RatingBar:2131755358 is not reachable.
-style:Widget_AppCompat_RatingBar_Indicator:2131755359 is not reachable.
-style:Widget_AppCompat_RatingBar_Small:2131755360 is not reachable.
-style:Widget_AppCompat_SearchView:2131755361 is not reachable.
-style:Widget_AppCompat_SearchView_ActionBar:2131755362 is not reachable.
-style:Widget_AppCompat_SeekBar:2131755363 is not reachable.
-style:Widget_AppCompat_SeekBar_Discrete:2131755364 is not reachable.
-style:Widget_AppCompat_Spinner:2131755365 is not reachable.
-style:Widget_AppCompat_Spinner_DropDown:2131755366 is not reachable.
-style:Widget_AppCompat_Spinner_DropDown_ActionBar:2131755367 is not reachable.
-style:Widget_AppCompat_Spinner_Underlined:2131755368 is not reachable.
-style:Widget_AppCompat_TextView:2131755369 is not reachable.
-style:Widget_AppCompat_TextView_SpinnerItem:2131755370 is not reachable.
-style:Widget_AppCompat_Toolbar:2131755371 is not reachable.
-style:Widget_AppCompat_Toolbar_Button_Navigation:2131755372 is not reachable.
-style:Widget_Compat_NotificationActionContainer:2131755373 is not reachable.
-style:Widget_Compat_NotificationActionText:2131755374 is not reachable.
+style:Theme_IAPTheme:2131755288 is not reachable.
+style:Theme_SplashScreen_IconBackground:2131755292 is not reachable.
+style:ThemeOverlay_AppCompat:2131755293 is not reachable.
+style:ThemeOverlay_AppCompat_ActionBar:2131755294 is not reachable.
+style:ThemeOverlay_AppCompat_Dark:2131755295 is not reachable.
+style:ThemeOverlay_AppCompat_Dark_ActionBar:2131755296 is not reachable.
+style:ThemeOverlay_AppCompat_DayNight:2131755297 is not reachable.
+style:ThemeOverlay_AppCompat_DayNight_ActionBar:2131755298 is not reachable.
+style:ThemeOverlay_AppCompat_Dialog:2131755299 is not reachable.
+style:ThemeOverlay_AppCompat_Dialog_Alert:2131755300 is not reachable.
+style:ThemeOverlay_AppCompat_Light:2131755301 is not reachable.
+style:Widget_AppCompat_ActionBar:2131755302 is not reachable.
+style:Widget_AppCompat_ActionBar_Solid:2131755303 is not reachable.
+style:Widget_AppCompat_ActionBar_TabBar:2131755304 is not reachable.
+style:Widget_AppCompat_ActionBar_TabText:2131755305 is not reachable.
+style:Widget_AppCompat_ActionBar_TabView:2131755306 is not reachable.
+style:Widget_AppCompat_ActionButton:2131755307 is not reachable.
+style:Widget_AppCompat_ActionButton_CloseMode:2131755308 is not reachable.
+style:Widget_AppCompat_ActionButton_Overflow:2131755309 is not reachable.
+style:Widget_AppCompat_ActionMode:2131755310 is not reachable.
+style:Widget_AppCompat_ActivityChooserView:2131755311 is not reachable.
+style:Widget_AppCompat_AutoCompleteTextView:2131755312 is not reachable.
+style:Widget_AppCompat_Button:2131755313 is not reachable.
+style:Widget_AppCompat_Button_Borderless:2131755314 is not reachable.
+style:Widget_AppCompat_Button_Borderless_Colored:2131755315 is not reachable.
+style:Widget_AppCompat_Button_ButtonBar_AlertDialog:2131755316 is not reachable.
+style:Widget_AppCompat_Button_Colored:2131755317 is not reachable.
+style:Widget_AppCompat_Button_Small:2131755318 is not reachable.
+style:Widget_AppCompat_ButtonBar:2131755319 is not reachable.
+style:Widget_AppCompat_ButtonBar_AlertDialog:2131755320 is not reachable.
+style:Widget_AppCompat_CompoundButton_CheckBox:2131755321 is not reachable.
+style:Widget_AppCompat_CompoundButton_RadioButton:2131755322 is not reachable.
+style:Widget_AppCompat_CompoundButton_Switch:2131755323 is not reachable.
+style:Widget_AppCompat_DrawerArrowToggle:2131755324 is not reachable.
+style:Widget_AppCompat_DropDownItem_Spinner:2131755325 is not reachable.
+style:Widget_AppCompat_EditText:2131755326 is not reachable.
+style:Widget_AppCompat_ImageButton:2131755327 is not reachable.
+style:Widget_AppCompat_Light_ActionBar:2131755328 is not reachable.
+style:Widget_AppCompat_Light_ActionBar_Solid:2131755329 is not reachable.
+style:Widget_AppCompat_Light_ActionBar_Solid_Inverse:2131755330 is not reachable.
+style:Widget_AppCompat_Light_ActionBar_TabBar:2131755331 is not reachable.
+style:Widget_AppCompat_Light_ActionBar_TabBar_Inverse:2131755332 is not reachable.
+style:Widget_AppCompat_Light_ActionBar_TabText:2131755333 is not reachable.
+style:Widget_AppCompat_Light_ActionBar_TabText_Inverse:2131755334 is not reachable.
+style:Widget_AppCompat_Light_ActionBar_TabView:2131755335 is not reachable.
+style:Widget_AppCompat_Light_ActionBar_TabView_Inverse:2131755336 is not reachable.
+style:Widget_AppCompat_Light_ActionButton:2131755337 is not reachable.
+style:Widget_AppCompat_Light_ActionButton_CloseMode:2131755338 is not reachable.
+style:Widget_AppCompat_Light_ActionButton_Overflow:2131755339 is not reachable.
+style:Widget_AppCompat_Light_ActionMode_Inverse:2131755340 is not reachable.
+style:Widget_AppCompat_Light_ActivityChooserView:2131755341 is not reachable.
+style:Widget_AppCompat_Light_AutoCompleteTextView:2131755342 is not reachable.
+style:Widget_AppCompat_Light_DropDownItem_Spinner:2131755343 is not reachable.
+style:Widget_AppCompat_Light_ListPopupWindow:2131755344 is not reachable.
+style:Widget_AppCompat_Light_ListView_DropDown:2131755345 is not reachable.
+style:Widget_AppCompat_Light_PopupMenu:2131755346 is not reachable.
+style:Widget_AppCompat_Light_PopupMenu_Overflow:2131755347 is not reachable.
+style:Widget_AppCompat_Light_SearchView:2131755348 is not reachable.
+style:Widget_AppCompat_Light_Spinner_DropDown_ActionBar:2131755349 is not reachable.
+style:Widget_AppCompat_ListMenuView:2131755350 is not reachable.
+style:Widget_AppCompat_ListPopupWindow:2131755351 is not reachable.
+style:Widget_AppCompat_ListView:2131755352 is not reachable.
+style:Widget_AppCompat_ListView_DropDown:2131755353 is not reachable.
+style:Widget_AppCompat_ListView_Menu:2131755354 is not reachable.
+style:Widget_AppCompat_PopupMenu:2131755355 is not reachable.
+style:Widget_AppCompat_PopupMenu_Overflow:2131755356 is not reachable.
+style:Widget_AppCompat_PopupWindow:2131755357 is not reachable.
+style:Widget_AppCompat_ProgressBar:2131755358 is not reachable.
+style:Widget_AppCompat_ProgressBar_Horizontal:2131755359 is not reachable.
+style:Widget_AppCompat_RatingBar:2131755360 is not reachable.
+style:Widget_AppCompat_RatingBar_Indicator:2131755361 is not reachable.
+style:Widget_AppCompat_RatingBar_Small:2131755362 is not reachable.
+style:Widget_AppCompat_SearchView:2131755363 is not reachable.
+style:Widget_AppCompat_SearchView_ActionBar:2131755364 is not reachable.
+style:Widget_AppCompat_SeekBar:2131755365 is not reachable.
+style:Widget_AppCompat_SeekBar_Discrete:2131755366 is not reachable.
+style:Widget_AppCompat_Spinner:2131755367 is not reachable.
+style:Widget_AppCompat_Spinner_DropDown:2131755368 is not reachable.
+style:Widget_AppCompat_Spinner_DropDown_ActionBar:2131755369 is not reachable.
+style:Widget_AppCompat_Spinner_Underlined:2131755370 is not reachable.
+style:Widget_AppCompat_TextView:2131755371 is not reachable.
+style:Widget_AppCompat_TextView_SpinnerItem:2131755372 is not reachable.
+style:Widget_AppCompat_Toolbar:2131755373 is not reachable.
+style:Widget_AppCompat_Toolbar_Button_Navigation:2131755374 is not reachable.
+style:Widget_Compat_NotificationActionContainer:2131755375 is not reachable.
+style:Widget_Compat_NotificationActionText:2131755376 is not reachable.
 styleable:ActionBar:2131820544 is not reachable.
 styleable:ActionBarLayout:2131820545 is not reachable.
 styleable:ActionMenuItemView:2131820546 is not reachable.

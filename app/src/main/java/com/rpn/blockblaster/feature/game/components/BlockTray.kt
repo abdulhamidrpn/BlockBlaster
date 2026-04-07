@@ -12,9 +12,18 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.pointer.*
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.border
+import androidx.compose.ui.tooling.preview.Devices
 import com.rpn.blockblaster.domain.model.Block
 
-@Preview
+@Preview(name = "Phone")
+@Preview(name = "Tablet", device = Devices.TABLET)
 @Composable
 private fun PreviewBlockTray() {
     BlockTray(
@@ -46,8 +55,13 @@ fun BlockTray(
                 onTrayLayout(pos.y, coords.size.height.toFloat())
             }
             .background(
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.97f),
-                shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
+                shape = RoundedCornerShape(28.dp)
+            )
+            .border(
+                width = 2.dp,
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+                shape = RoundedCornerShape(28.dp)
             )
             .padding(horizontal = 12.dp, vertical = 20.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -96,24 +110,73 @@ private fun TraySlot(
         )
     }
 
+    var rootPos by remember { mutableStateOf(Offset.Zero) }
+
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 100.dp)
-            .graphicsLayer { translationX = shakeAnim.value },
+            .heightIn(min = 120.dp)
+            .graphicsLayer { translationX = shakeAnim.value }
+            .onGloballyPositioned { coords -> rootPos = coords.positionInRoot() }
+            .pointerInput(block != null) {
+                if (block == null) return@pointerInput
+                awaitEachGesture {
+                    val down = awaitFirstDown(requireUnconsumed = false)
+                    down.consume()
+                    var dragPos = rootPos + down.position
+                    onDragStart(dragPos.x, dragPos.y)
+
+                    var active = true
+                    while (active) {
+                        val event = awaitPointerEvent()
+                        val change = event.changes.firstOrNull { it.id == down.id }
+
+                        if (change == null) {
+                            active = false
+                            onDragEnd(dragPos.x, dragPos.y)
+                            break
+                        }
+
+                        if (change.changedToUp() || change.changedToUpIgnoreConsumed() || !change.pressed) {
+                            active = false
+                            onDragEnd(dragPos.x, dragPos.y)
+                            break
+                        }
+
+                        val posChange = change.positionChange()
+                        if (posChange != Offset.Zero) {
+                            change.consume()
+                            dragPos += posChange
+                            onDragUpdate(dragPos.x, dragPos.y)
+                        }
+                    }
+                }
+            },
         contentAlignment = Alignment.Center
     ) {
+        val scale by animateFloatAsState(
+            targetValue = if (isDragging) 0.85f else 1f,
+            animationSpec = tween(150),
+            label = "scaleAnim"
+        )
+        val alpha by animateFloatAsState(
+            targetValue = if (isDragging) 0.3f else 1f,
+            animationSpec = tween(80),
+            label = "alphaAnim"
+        )
+
         when {
-            block != null -> DraggableBlock(
-                block = block,
-                index = 0, // slot identity handled by onDragStart closure
-                enabled = true,
-                onDragStart = onDragStart,
-                onDragUpdate = onDragUpdate,
-                onDragEnd = onDragEnd,
-                onDragCancel = {},
-                modifier = Modifier.fillMaxWidth()
-            )
+            block != null -> {
+                Box(
+                    modifier = Modifier.graphicsLayer {
+                        scaleX = scale
+                        scaleY = scale
+                        this.alpha = alpha
+                    }
+                ) {
+                    BlockPreview(block = block, cellDp = 24)
+                }
+            }
 
             block == null -> UsedSlot()
         }

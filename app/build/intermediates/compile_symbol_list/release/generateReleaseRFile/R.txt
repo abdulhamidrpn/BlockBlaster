@@ -47,6 +47,7 @@ int string paused 0x0
 int string perfect 0x0
 int string play 0x0
 int string play_again 0x0
+int string play_games_app_id 0x0
 int string project_id 0x0
 int string restart 0x0
 int string resume 0x0

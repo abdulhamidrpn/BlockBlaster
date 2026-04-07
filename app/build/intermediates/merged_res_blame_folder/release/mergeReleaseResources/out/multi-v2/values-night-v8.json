@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.rpn.blockblaster.app-mergeReleaseResources-68:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.rpn.blockblaster.app-mergeReleaseResources-70:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\b6d3f4398357c91ad57020c072d1e2e6\\workspace\\transformed\\core-splashscreen-1.2.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\e16adb0e55c6f4e189422732a6778642\\workspace\\transformed\\core-splashscreen-1.2.0\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\b65d462e96214b0bca500b3f2a463196\\workspace\\transformed\\appcompat-1.7.1\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "C:\\Users\\abdul\\.gradle\\caches\\9.3.1\\transforms\\9674bb1d41795aa6cd077409ce78a11c\\workspace\\transformed\\appcompat-1.7.1\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
