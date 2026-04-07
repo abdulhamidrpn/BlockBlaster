@@ -14,10 +14,11 @@ class AdManager(private val context: Context) {
     private var reviveRewardedAd: RewardedAd? = null
 
     val bannerAdUnitId: String
-        get() = if (BuildConfig.DEBUG) "ca-app-pub-3940256099942544/9214589741" else "ca-app-pub-6797594674942943/2118225665"
+        get() = if (BuildConfig.DEBUG) "ca-app-pub-3940256099942544/9214589741" else BuildConfig.ADMOB_BANNER_ID
 
     val rewardAdUnitId: String
-        get() = if (BuildConfig.DEBUG) "ca-app-pub-3940256099942544/5224354917" else "ca-app-pub-6797594674942943/7530334447"
+        get() = if (BuildConfig.DEBUG) "ca-app-pub-3940256099942544/5224354917" else BuildConfig.ADMOB_REWARD_ID
+
 
     fun loadReviveAd() {
         if (reviveRewardedAd != null) return

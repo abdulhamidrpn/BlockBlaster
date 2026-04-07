@@ -18,9 +18,14 @@ import com.rpn.blockblaster.service.AdManager
 import com.google.android.gms.ads.MobileAds
 import org.koin.android.ext.android.inject
 
+import com.rpn.blockblaster.core.play.PlayServicesManager
+import com.rpn.blockblaster.core.play.PlayGamesManager
+
 class MainActivity : ComponentActivity() {
 
     private val adManager: AdManager by inject()
+    private val playServicesManager: PlayServicesManager by inject()
+    private val playGamesManager: PlayGamesManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +34,10 @@ class MainActivity : ComponentActivity() {
         // Initialize AdMob
         MobileAds.initialize(this) {}
         adManager.loadReviveAd()
+        
+        // Play Services Integration
+        playGamesManager.signInSilently(this)
+        playServicesManager.checkForUpdates(this)
         
         enableEdgeToEdge()
         setContent {
@@ -40,5 +49,10 @@ class MainActivity : ComponentActivity() {
                 AppNavGraph()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        playServicesManager.onResumeCheck(this)
     }
 }

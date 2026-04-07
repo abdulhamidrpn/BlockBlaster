@@ -34,4 +34,8 @@
     <string name="share_score">Share Score</string>
     <string name="daily_challenge">Daily Challenge</string>
     <string name="stats">Stats This Session</string>
+
+    <string name="play_games_app_id" translatable="false">830994712093</string>
+
+
 </resources>

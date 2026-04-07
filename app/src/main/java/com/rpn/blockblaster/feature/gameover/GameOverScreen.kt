@@ -1,5 +1,6 @@
 package com.rpn.blockblaster.feature.gameover
 
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
@@ -11,13 +12,35 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -27,36 +50,51 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.rpn.blockblaster.core.designsystem.AccentRed
 import com.rpn.blockblaster.core.designsystem.BlockColors
 import com.rpn.blockblaster.core.designsystem.GoldColor
+import com.rpn.blockblaster.core.play.PlayGamesManager
+import com.rpn.blockblaster.core.play.PlayServicesManager
 import com.rpn.blockblaster.feature.game.components.Button3D
+import com.rpn.blockblaster.service.AdManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
-import androidx.compose.ui.viewinterop.AndroidView
-import com.rpn.blockblaster.service.AdManager
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
 
 @Composable
 fun GameOverScreen(
-    finalScore:  Int,
-    bestScore:   Int,
+    finalScore: Int,
+    bestScore: Int,
     onPlayAgain: () -> Unit,
-    onHome:      () -> Unit
+    onHome: () -> Unit
 ) {
     val vm: GameOverViewModel = koinViewModel()
-    val state   by vm.state.collectAsState()
+    val state by vm.state.collectAsState()
     val context = LocalContext.current
     val adManager: AdManager = koinInject()
+    val playGamesManager: PlayGamesManager = koinInject()
+    val playServicesManager: PlayServicesManager = koinInject()
+    val profile by playGamesManager.profileState.collectAsState()
+    val activity = context as? Activity
 
     LaunchedEffect(finalScore, bestScore) {
         vm.init(finalScore, bestScore)
+
+        if (activity != null) {
+            playGamesManager.submitScore(activity, finalScore)
+            if (finalScore >= 1000) {
+                playGamesManager.unlockAchievement(activity)
+            }
+        }
     }
 
     LaunchedEffect(vm) {
@@ -67,35 +105,37 @@ fun GameOverScreen(
                 is GameOverUiEvent.Share -> {
                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
                         type = "text/plain"
+                        val playStoreUrl = "https://play.google.com/store/apps/details?id=${context.packageName}"
                         putExtra(
                             Intent.EXTRA_TEXT,
-                            "I scored ${event.score} in Block Blaster! Can you beat me? #BlockBlaster"
+                            "I scored ${event.score} in Block Blaster! Can you beat me?\nDownload the game here:\n$playStoreUrl"
                         )
                     }
                     context.startActivity(Intent.createChooser(shareIntent, "Share Score"))
+                }
+                is GameOverUiEvent.TriggerReview -> {
+                    activity?.let { playServicesManager.requestInAppReview(it) }
                 }
             }
         }
     }
 
-    // Staggered card entrance animations
-    var showTitle   by remember { mutableStateOf(false) }
-    var showCard1   by remember { mutableStateOf(false) }
-    var showCard2   by remember { mutableStateOf(false) }
+    var showTitle by remember { mutableStateOf(false) }
+    var showCard by remember { mutableStateOf(false) }
     var showButtons by remember { mutableStateOf(false) }
+    
     LaunchedEffect(Unit) {
-        delay(80);  showTitle   = true
-        delay(160); showCard1   = true
-        delay(160); showCard2   = true
-        delay(160); showButtons = true
+        delay(50); showTitle = true
+        delay(100); showCard = true
+        delay(150); showButtons = true
     }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.systemBars)
     ) {
-        // Animated falling blocks background
         FallingBlocksBackground()
 
         Column(
@@ -104,114 +144,124 @@ fun GameOverScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center // Use Top and manage with spacers for more control
         ) {
-            Spacer(Modifier.height(40.dp))
+            // Reduced initial top space
+            Spacer(Modifier.height(46.dp))
 
             // ── Title ─────────────────────────────────────────────────────────
             AnimatedVisibility(
                 visible = showTitle,
-                enter   = fadeIn(tween(400)) + slideInVertically { -40 }
+                enter = fadeIn(tween(400)) + slideInVertically { -20 }
             ) {
-                Text(
-                    text          = "GAME OVER",
-                    fontSize      = 40.sp,
-                    fontWeight    = FontWeight.ExtraBold,
-                    color         = AccentRed,
-                    letterSpacing = 4.sp,
-                    textAlign     = TextAlign.Center
-                )
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "GAME OVER",
+                        fontSize = 32.sp,
+                        fontWeight = FontWeight.Black,
+                        color = AccentRed,
+                        letterSpacing = 4.sp,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.displayLarge.copy(
+                            shadow = androidx.compose.ui.graphics.Shadow(
+                                color = AccentRed.copy(alpha = 0.4f),
+                                offset = Offset(0f, 4f),
+                                blurRadius = 8f
+                            )
+                        )
+                    )
+                    Text(
+                        text = "OUT OF MOVES",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                        letterSpacing = 2.sp
+                    )
+                }
             }
 
-            Spacer(Modifier.height(32.dp))
+            Spacer(Modifier.height(16.dp))
 
-            // ── Your Score card ───────────────────────────────────────────────
+            // ── Unified Score Summary Card ───────────────────────────────────
+            val actualBest = maxOf(state.bestScore, profile?.rawScore?.toInt() ?: 0)
             AnimatedVisibility(
-                visible = showCard1,
-                enter   = fadeIn(tween(400)) + slideInVertically { 60 }
+                visible = showCard,
+                enter = fadeIn(tween(500)) + slideInVertically { 30 }
             ) {
-                ScoreCard(
-                    label     = "YOUR SCORE",
-                    value     = state.finalScore,
-                    isNewBest = state.isNewBest,
-                    valueColor = if (state.isNewBest) GoldColor
-                                 else MaterialTheme.colorScheme.onSurface
+                SummaryCard(
+                    finalScore = state.finalScore,
+                    bestScore = actualBest,
+                    isNewBest = state.finalScore > actualBest || state.isNewBest
                 )
             }
 
-            Spacer(Modifier.height(14.dp))
-
-            // ── Best Score card ───────────────────────────────────────────────
-            AnimatedVisibility(
-                visible = showCard2,
-                enter   = fadeIn(tween(400)) + slideInVertically { 80 }
-            ) {
-                ScoreCard(
-                    label      = "BEST SCORE",
-                    value      = state.bestScore,
-                    isNewBest  = false,
-                    valueColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f)
-                )
-            }
-
-            Spacer(Modifier.height(32.dp))
+            Spacer(Modifier.height(20.dp))
 
             // ── Action buttons ────────────────────────────────────────────────
             AnimatedVisibility(
                 visible = showButtons,
-                enter   = fadeIn(tween(400)) + slideInVertically { 100 }
+                enter = fadeIn(tween(400)) + slideInVertically { 50 }
             ) {
                 Column(
-                    modifier            = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     Button3D(
-                        text     = "PLAY AGAIN",
-                        onClick  = { vm.onIntent(GameOverIntent.PlayAgain) },
+                        text = "PLAY AGAIN",
+                        onClick = { vm.onIntent(GameOverIntent.PlayAgain) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(56.dp),
-                        color    = AccentRed,
+                        color = AccentRed,
                         textSize = 18.sp
                     )
 
                     Row(
-                        modifier            = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         Button3D(
-                            text     = "HOME",
-                            onClick  = { vm.onIntent(GameOverIntent.GoHome) },
+                            text = "HOME",
+                            onClick = { vm.onIntent(GameOverIntent.GoHome) },
                             modifier = Modifier
                                 .weight(1f)
-                                .height(52.dp),
-                            color    = Color(0xFF0F3460),
-                            textSize = 16.sp
+                                .height(48.dp),
+                            color = Color(0xFF1E293B),
+                            textSize = 15.sp
                         )
                         Button3D(
-                            text     = "SHARE",
-                            onClick  = { vm.onIntent(GameOverIntent.Share) },
+                            text = "SHARE",
+                            onClick = { vm.onIntent(GameOverIntent.Share) },
                             modifier = Modifier
                                 .weight(1f)
-                                .height(52.dp),
-                            color    = Color(0xFF2D2D50),
-                            textSize = 16.sp
+                                .height(48.dp),
+                            color = Color(0xFF334155),
+                            textSize = 15.sp
                         )
                     }
+                    Button3D(
+                        text = "LEADERBOARDS",
+                        onClick = { activity?.let { playGamesManager.showLeaderboard(it) } },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(48.dp),
+                        color = Color(0xFF0F766E),
+                        textSize = 16.sp
+                    )
                 }
             }
 
-            Spacer(Modifier.height(40.dp))
+            Spacer(Modifier.height(24.dp))
         }
 
-        // Confetti overlay only when new best score
         if (state.isNewBest) {
             ConfettiEffect()
         }
 
-        // ── Banner Ad ──────────────────────────────────────────────────────────
         AndroidView(
-            modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth(),
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth(),
             factory = { ctx ->
                 AdView(ctx).apply {
                     setAdSize(AdSize.BANNER)
@@ -223,112 +273,138 @@ fun GameOverScreen(
     }
 }
 
-// ── Score Card ────────────────────────────────────────────────────────────────
-
 @Composable
-private fun ScoreCard(
-    label:      String,
-    value:      Int,
-    isNewBest:  Boolean,
-    valueColor: Color
+private fun SummaryCard(
+    finalScore: Int,
+    bestScore: Int,
+    isNewBest: Boolean
 ) {
-    // FIX: infiniteTransition.animateFloat must use infiniteRepeatable(), NOT tween() directly.
-    // tween() produces TweenSpec<T> which is incompatible with InfiniteRepeatableSpec<T>.
-    val infiniteTransition = rememberInfiniteTransition(label = "cardGlow")
+    val infiniteTransition = rememberInfiniteTransition(label = "summaryGlow")
     val glowAlpha by infiniteTransition.animateFloat(
-        initialValue = if (isNewBest) 0.35f else 0f,
-        targetValue  = if (isNewBest) 1f    else 0f,
-        animationSpec = infiniteRepeatable(          // <-- CORRECT: wraps tween in infiniteRepeatable
-            animation   = tween(durationMillis = 800, easing = LinearEasing),
-            repeatMode  = RepeatMode.Reverse
+        initialValue = if (isNewBest) 0.3f else 0f,
+        targetValue = if (isNewBest) 0.8f else 0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
         ),
         label = "glowAlpha"
     )
 
     Card(
-        modifier  = Modifier
+        modifier = Modifier
             .fillMaxWidth()
             .then(
                 if (isNewBest) Modifier.border(
                     width = 2.dp,
                     color = GoldColor.copy(alpha = glowAlpha),
-                    shape = RoundedCornerShape(16.dp)
-                ) else Modifier
+                    shape = RoundedCornerShape(20.dp)
+                ) else Modifier.border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
+                    shape = RoundedCornerShape(20.dp)
+                )
             ),
-        shape     = RoundedCornerShape(16.dp),
-        colors    = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(
+            // Set to Transparent to match the background column perfectly
+            containerColor = Color.Transparent
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(
-            modifier            = Modifier
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 22.dp, horizontal = 20.dp),
+                .padding(vertical = 12.dp, horizontal = 20.dp), // Reduced vertical padding
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (isNewBest) {
                 Text(
-                    text          = "NEW BEST!",
-                    fontSize      = 13.sp,
-                    fontWeight    = FontWeight.ExtraBold,
-                    color         = GoldColor,
-                    letterSpacing = 3.sp
+                    text = "NEW HIGH SCORE!",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Black,
+                    color = GoldColor,
+                    letterSpacing = 2.sp,
                 )
                 Spacer(Modifier.height(4.dp))
+            } else {
+                Text(
+                    text = "SCORE",
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                    letterSpacing = 2.sp
+                )
             }
 
             Text(
-                text          = label,
-                fontSize      = 11.sp,
-                fontWeight    = FontWeight.SemiBold,
-                color         = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                letterSpacing = 2.5.sp
+                text = finalScore.toString(),
+                fontSize = 48.sp,
+                fontWeight = FontWeight.Black,
+                color = if (isNewBest) GoldColor else MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.displayLarge.copy(
+                    shadow = androidx.compose.ui.graphics.Shadow(
+                        color = (if (isNewBest) GoldColor else Color.Black).copy(alpha = 0.2f),
+                        offset = Offset(0f, 4f),
+                        blurRadius = 6f
+                    )
+                )
             )
 
-            Spacer(Modifier.height(6.dp))
+            Spacer(Modifier.height(8.dp))
+            HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
+            Spacer(Modifier.height(8.dp))
 
-            Text(
-                text       = value.toString(),
-                fontSize   = 48.sp,
-                fontWeight = FontWeight.ExtraBold,
-                color      = valueColor
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "BEST SCORE",
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                    letterSpacing = 1.sp
+                )
+                Text(
+                    text = bestScore.toString(),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                )
+            }
         }
     }
 }
-
-// ── Confetti (new best score celebration) ────────────────────────────────────
 
 @Composable
 private fun ConfettiEffect() {
     data class ConfettiParticle(
         val startX: Float,
         val startY: Float,
-        val color:  Color,
-        val size:   Float,
-        val speed:  Float
+        val color: Color,
+        val size: Float,
+        val speed: Float
     )
 
     val particles = remember {
         List(70) {
             ConfettiParticle(
                 startX = (0..1000).random() / 1000f,
-                startY = -(0..40).random()  / 100f,
-                color  = BlockColors[(0 until BlockColors.size).random()],
-                size   = (4..10).random().toFloat(),
-                speed  = (0.6f..1.4f).random()
+                startY = -(0..40).random() / 100f,
+                color = BlockColors[(0 until BlockColors.size).random()],
+                size = (4..10).random().toFloat(),
+                speed = (0.6f..1.4f).random()
             )
         }
     }
 
-    // FIX: Use infiniteRepeatable(tween(...)) — NOT tween() directly
     val infiniteTransition = rememberInfiniteTransition(label = "confetti")
     val progress by infiniteTransition.animateFloat(
-        initialValue  = 0f,
-        targetValue   = 1f,
+        initialValue = 0f,
+        targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation  = tween(durationMillis = 3000, easing = LinearEasing),
+            animation = tween(durationMillis = 3000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         ),
         label = "confettiProgress"
@@ -336,12 +412,12 @@ private fun ConfettiEffect() {
 
     Canvas(modifier = Modifier.fillMaxSize()) {
         particles.forEach { p ->
-            val x     = p.startX * size.width
-            val y     = ((p.startY + progress * p.speed) % 1.1f) * size.height
+            val x = p.startX * size.width
+            val y = ((p.startY + progress * p.speed) % 1.1f) * size.height
             val alpha = if (y > size.height * 0.85f) ((size.height - y) / (size.height * 0.15f)).coerceIn(0f, 1f) else 0.85f
             if (y > 0f) {
                 drawCircle(
-                    color  = p.color.copy(alpha = alpha),
+                    color = p.color.copy(alpha = alpha),
                     radius = p.size,
                     center = Offset(x, y)
                 )
@@ -350,8 +426,6 @@ private fun ConfettiEffect() {
     }
 }
 
-// ── Falling blocks background ─────────────────────────────────────────────────
-
 @Composable
 private fun FallingBlocksBackground() {
     data class BgBlock(val sx: Float, val sy: Float, val color: Color, val speed: Float)
@@ -359,21 +433,20 @@ private fun FallingBlocksBackground() {
     val blocks = remember {
         List(18) {
             BgBlock(
-                sx    = (0..100).random() / 100f,
-                sy    = (0..100).random() / 100f,
+                sx = (0..100).random() / 100f,
+                sy = (0..100).random() / 100f,
                 color = BlockColors[(0 until BlockColors.size).random()],
                 speed = (0.3f..0.7f).random()
             )
         }
     }
 
-    // FIX: infiniteRepeatable(tween(...)) — correct usage
     val infiniteTransition = rememberInfiniteTransition(label = "bgFalling")
     val progress by infiniteTransition.animateFloat(
-        initialValue  = 0f,
-        targetValue   = 1f,
+        initialValue = 0f,
+        targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation  = tween(durationMillis = 7000, easing = LinearEasing),
+            animation = tween(durationMillis = 7000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         ),
         label = "fallingProgress"
@@ -384,9 +457,9 @@ private fun FallingBlocksBackground() {
             val x = b.sx * size.width
             val y = ((b.sy + progress * b.speed) % 1f) * size.height
             drawRoundRect(
-                color        = b.color.copy(alpha = 0.07f),
-                topLeft      = Offset(x, y),
-                size         = Size(22f, 22f),
+                color = b.color.copy(alpha = 0.05f),
+                topLeft = Offset(x, y),
+                size = Size(20f, 20f),
                 cornerRadius = CornerRadius(4f)
             )
         }
@@ -395,3 +468,16 @@ private fun FallingBlocksBackground() {
 
 private fun ClosedFloatingPointRange<Float>.random(): Float =
     start + (endInclusive - start) * kotlin.random.Random.nextFloat()
+
+@Preview(name = "Phone", showBackground = true)
+@Composable
+private fun GameOverScreenPreview() {
+    MaterialTheme {
+        GameOverScreen(
+            finalScore = 1234,
+            bestScore = 5678,
+            onPlayAgain = { },
+            onHome = { }
+        )
+    }
+}

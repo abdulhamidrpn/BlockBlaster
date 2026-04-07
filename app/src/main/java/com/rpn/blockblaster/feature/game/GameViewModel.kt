@@ -66,7 +66,7 @@ class GameViewModel(
         viewModelScope.launch {
             val best  = getBestScore()
             val board = initBoard()
-            val tray  = spawnBlocks()
+            val tray  = spawnBlocks(board, 0)
             setState {
                 GameState(
                     board = board, trayBlocks = tray, bestScore = best,
@@ -268,7 +268,7 @@ class GameViewModel(
     }
 
     private fun refreshTray(board: List<List<BoardCell>>, score: Int, streak: Int, stats: SessionStats) {
-        val newTray = spawnBlocks()
+        val newTray = spawnBlocks(board, score)
         setState { copy(trayBlocks = newTray) }
         checkAndHandleGameOver(board, newTray)
     }
@@ -295,7 +295,7 @@ class GameViewModel(
         if (!currentState.canRevive) { endGame(); return }
         soundManager.play(SoundType.REVIVE)
         val cleared = clearReviveArea(currentState.board)
-        val newTray = spawnBlocks()
+        val newTray = spawnBlocks(cleared, currentState.currentScore)
         setState { copy(board = cleared, trayBlocks = newTray, phase = GamePhase.Playing, canRevive = true, comboStreak = 0) }
     }
 

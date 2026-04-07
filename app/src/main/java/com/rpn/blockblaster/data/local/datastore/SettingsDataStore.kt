@@ -20,6 +20,7 @@ class SettingsDataStore(private val context: Context) {
         val KEY_DARK      = booleanPreferencesKey("dark_theme")
         val KEY_GRID      = booleanPreferencesKey("show_grid")
         val KEY_ANIM_MS   = intPreferencesKey("anim_speed_ms")
+        val KEY_GAMES_PLAYED = intPreferencesKey("games_played")
     }
 
     fun getSettings(): Flow<AppSettings> = context.dataStore.data
@@ -31,7 +32,8 @@ class SettingsDataStore(private val context: Context) {
                 vibrationEnabled = prefs[KEY_VIBRATION] ?: true,
                 isDarkTheme      = prefs[KEY_DARK]      ?: true,
                 showGridLines    = prefs[KEY_GRID]      ?: true,
-                animSpeedMs      = prefs[KEY_ANIM_MS]   ?: 300
+                animSpeedMs      = prefs[KEY_ANIM_MS]   ?: 300,
+                gamesPlayed      = prefs[KEY_GAMES_PLAYED] ?: 0
             )
         }
 
@@ -43,6 +45,7 @@ class SettingsDataStore(private val context: Context) {
             prefs[KEY_DARK]      = settings.isDarkTheme
             prefs[KEY_GRID]      = settings.showGridLines
             prefs[KEY_ANIM_MS]   = settings.animSpeedMs
+            prefs[KEY_GAMES_PLAYED] = settings.gamesPlayed
         }
     }
 }

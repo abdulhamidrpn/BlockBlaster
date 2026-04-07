@@ -18,12 +18,23 @@ import androidx.compose.ui.unit.*
 import com.rpn.blockblaster.core.designsystem.AccentRed
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
+import android.app.Activity
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
+import com.rpn.blockblaster.core.play.PlayServicesManager
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(onBack: () -> Unit) {
     val vm: SettingsViewModel = koinViewModel()
     val state by vm.state.collectAsState()
+    val playServicesManager: PlayServicesManager = koinInject()
+    val playGamesManager: com.rpn.blockblaster.core.play.PlayGamesManager = koinInject()
+    val profile by playGamesManager.profileState.collectAsState()
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(vm) {
         vm.events.collectLatest { event ->
@@ -79,9 +90,39 @@ fun SettingsScreen(onBack: () -> Unit) {
                 }
 
                 Spacer(Modifier.height(16.dp))
+                SettingsSectionHeader("🎮  Google Play Games")
+                if (profile != null) {
+                    SettingsClickableRow("Connected as ${profile!!.displayName}") {
+                        // Action could be to show achievements/leaderboards or sign out.
+                        val activity = context as? Activity
+                        activity?.let { playGamesManager.showLeaderboard(it) }
+                    }
+                } else {
+                    SettingsClickableRow("Connect Account") {
+                        val activity = context as? Activity
+                        activity?.let { playGamesManager.requestManualSignIn(it) }
+                    }
+                }
+
+                Spacer(Modifier.height(16.dp))
+                SettingsSectionHeader("⭐️  Support Us")
+                SettingsClickableRow("Rate This App") {
+                    coroutineScope.launch {
+                        val activity = context as? Activity
+                        if (activity != null) {
+                            val success = playServicesManager.requestInAppReview(activity)
+                            if (!success) playServicesManager.openPlayStoreForReview()
+                        }
+                    }
+                }
+                SettingsClickableRow("More Apps") {
+                    playServicesManager.openMoreApps("RPN Play Inc.") // replace "RPN" if needed
+                }
+
+                Spacer(Modifier.height(16.dp))
                 HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(0.1f))
                 Spacer(Modifier.height(8.dp))
-                Text("Version 1.0.0", fontSize = 13.sp,
+                Text("Version 1.0.3", fontSize = 13.sp,
                     color = MaterialTheme.colorScheme.onSurface.copy(0.4f))
             }
         }
@@ -173,4 +214,28 @@ private fun AnimSpeedRow(currentMs: Int, onSelect: (Int) -> Unit) {
             }
         }
     }
+}
+
+@Composable
+private fun SettingsClickableRow(label: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surface)
+            .clickable { onClick() }
+            .padding(horizontal = 16.dp, vertical = 16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(label, fontSize = 15.sp,
+            color    = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.weight(1f))
+        Icon(
+            imageVector = androidx.compose.material.icons.Icons.AutoMirrored.Filled.ArrowBack, // Will flip or just use a generic icon
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+            modifier = Modifier.graphicsLayer(rotationZ = 180f).size(18.dp) // Point right
+        )
+    }
+    Spacer(Modifier.height(4.dp))
 }
