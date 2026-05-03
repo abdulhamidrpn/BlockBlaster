@@ -13,6 +13,7 @@ import com.rpn.blockblaster.service.AdManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+
 val appModule = module {
     single { SoundManager(androidContext()) }
     single { VibrationManager(androidContext()) }
@@ -31,22 +32,29 @@ val appModule = module {
     factory { GetSettingsUseCase(get()) }
     factory { SaveSettingsUseCase(get()) }
 
+    factory { SaveGameStateUseCase(get()) }
+    factory { LoadGameStateUseCase(get()) }
+    factory { ClearGameStateUseCase(get()) }
+
     viewModel {
         GameViewModel(
-            initBoard      = get(),
-            placeBlock     = get(),
-            blastLines     = get(),
-            spawnBlocks    = get(),
-            checkGameOver  = get(),
-            calcScore      = get(),
-            saveScore      = get(),
-            getBestScore   = get(),
-            getSettings    = get(),
-            soundManager   = get(),
+            initBoard        = get(),
+            placeBlock       = get(),
+            blastLines       = get(),
+            spawnBlocks      = get(),
+            checkGameOver    = get(),
+            calcScore        = get(),
+            saveScore        = get(),
+            getBestScore     = get(),
+            getSettings      = get(),
+            saveGameState    = get(),
+            loadGameState    = get(),
+            clearGameState   = get(),
+            soundManager     = get(),
             vibrationManager = get()
         )
     }
-    viewModel { HomeViewModel(getBestScore = get()) }
+    viewModel { HomeViewModel(getBestScore = get(), getSettings = get()) }
     viewModel { GameOverViewModel(getSettings = get(), saveSettings = get()) }
     viewModel { SettingsViewModel(getSettings = get(), saveSettings = get()) }
 }

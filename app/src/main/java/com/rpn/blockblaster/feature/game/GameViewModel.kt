@@ -7,6 +7,7 @@ import com.rpn.blockblaster.core.designsystem.AccentRed
 import com.rpn.blockblaster.core.designsystem.BlockMint
 import com.rpn.blockblaster.core.designsystem.BlockTeal
 import com.rpn.blockblaster.core.designsystem.GoldColor
+import com.rpn.blockblaster.domain.engine.Difficulty
 import com.rpn.blockblaster.domain.model.*
 import com.rpn.blockblaster.domain.usecase.game.*
 import com.rpn.blockblaster.domain.usecase.score.*
@@ -15,6 +16,8 @@ import com.rpn.blockblaster.service.SoundManager
 import com.rpn.blockblaster.service.SoundType
 import com.rpn.blockblaster.service.VibrationManager
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 
 class GameViewModel(
     private val initBoard:        InitBoardUseCase,
@@ -26,6 +29,9 @@ class GameViewModel(
     private val saveScore:        SaveScoreUseCase,
     private val getBestScore:     GetBestScoreUseCase,
     private val getSettings:      GetSettingsUseCase,
+    private val saveGameState:    SaveGameStateUseCase,
+    private val loadGameState:    LoadGameStateUseCase,
+    private val clearGameState:   ClearGameStateUseCase,
     private val soundManager:     SoundManager,
     private val vibrationManager: VibrationManager
 ) : MviViewModel<GameState, GameIntent, GameUiEvent>(GameState()) {
@@ -34,7 +40,7 @@ class GameViewModel(
     private var scoreAnimJob: Job? = null
     private var settingsJob:  Job? = null
 
-    init { onIntent(GameIntent.StartGame) }
+    init { /* Handled by GameScreen via Started intent */ }
 
     override fun onIntent(intent: GameIntent) {
         when (intent) {
@@ -49,8 +55,8 @@ class GameViewModel(
             is GameIntent.AcceptRevive   -> handleRevive()
             is GameIntent.DeclineRevive  -> { soundManager.play(SoundType.BUTTON_CLICK); endGame() }
             is GameIntent.PauseReviveTimer -> reviveJob?.cancel()
-            is GameIntent.NavigateHome   -> { soundManager.play(SoundType.BUTTON_CLICK); sendEvent(GameUiEvent.NavigateHome) }
-            is GameIntent.ReplayGame     -> { soundManager.play(SoundType.BUTTON_CLICK); startGame() }
+            is GameIntent.NavigateHome   -> { soundManager.play(SoundType.BUTTON_CLICK); saveCurrentState(); sendEvent(GameUiEvent.NavigateHome) }
+            is GameIntent.ReplayGame     -> { soundManager.play(SoundType.BUTTON_CLICK); viewModelScope.launch { clearGameState() }; startGame() }
             is GameIntent.SetBoardLayout -> setState {
                 copy(boardOriginX = intent.x, boardOriginY = intent.y,
                     cellSize = intent.width / BOARD_SIZE.toFloat())
@@ -64,14 +70,56 @@ class GameViewModel(
     private fun startGame() {
         reviveJob?.cancel(); scoreAnimJob?.cancel(); settingsJob?.cancel()
         viewModelScope.launch {
-            val best  = getBestScore()
-            val board = initBoard()
-            val tray  = spawnBlocks(board, 0)
-            setState {
-                GameState(
-                    board = board, trayBlocks = tray, bestScore = best,
-                    canRevive = true, displayScore = 0
-                )
+            val settings = getSettings().first()
+            val currentSettingsDifficulty = settings.difficulty
+            
+            val saved = loadGameState()
+            // Only restore if saved game difficulty matches current settings
+            if (saved != null && saved.difficulty == currentSettingsDifficulty.name) {
+                // Restore saved game
+                val board = saved.board.map { row ->
+                    row.map { cell ->
+                        BoardCell(
+                            isFilled = cell.isFilled,
+                            color = cell.colorArgb?.let { Color(it.toULong()) }
+                        )
+                    }
+                }
+                val tray = saved.tray.map { bState ->
+                    bState?.let {
+                        Block(
+                            shape = it.shape,
+                            color = Color(it.colorArgb.toULong()),
+                            name = it.name
+                        )
+                    }
+                }
+                val best = getBestScore(currentSettingsDifficulty.name)
+                setState {
+                    GameState(
+                        board = board,
+                        trayBlocks = tray,
+                        currentScore = saved.score,
+                        displayScore = saved.score,
+                        bestScore = best,
+                        difficulty = currentSettingsDifficulty,
+                        comboStreak = saved.comboStreak,
+                        canRevive = saved.canRevive
+                    )
+                }
+            } else {
+                // Start fresh with settings difficulty
+                val best  = getBestScore(currentSettingsDifficulty.name)
+                val board = initBoard()
+                val tray  = spawnBlocks(board, currentSettingsDifficulty)
+                setState {
+                    GameState(
+                        board = board, trayBlocks = tray, bestScore = best,
+                        difficulty = currentSettingsDifficulty,
+                        canRevive = true, displayScore = 0
+                    )
+                }
+                saveCurrentState()
             }
         }
         settingsJob = viewModelScope.launch {
@@ -84,12 +132,35 @@ class GameViewModel(
         }
     }
 
+    private fun saveCurrentState() {
+        val s = currentState
+        viewModelScope.launch {
+            val persistenceState = GamePersistenceState(
+                board = s.board.map { row ->
+                    row.map { cell ->
+                        BoardCellState(cell.isFilled, cell.color?.value?.toLong())
+                    }
+                },
+                tray = s.trayBlocks.map { block ->
+                    block?.let {
+                        BlockState(it.shape, it.color.value.toLong(), it.name)
+                    }
+                },
+                score = s.currentScore,
+                comboStreak = s.comboStreak,
+                difficulty = s.difficulty.name,
+                canRevive = s.canRevive,
+                timestamp = System.currentTimeMillis()
+            )
+            saveGameState(persistenceState)
+        }
+    }
+
     private fun handleStartDrag(index: Int) {
         val block = currentState.trayBlocks.getOrNull(index) ?: return
         setState { copy(dragState = DragState(index, block), highlightCells = emptySet(), isHighlightValid = true) }
     }
 
-    /** Called every time the dragged block moves to a new grid cell. */
     private fun handleUpdateDragCell(row: Int, col: Int) {
         val ds = currentState.dragState ?: return
         val s  = currentState
@@ -132,13 +203,14 @@ class GameViewModel(
             )
         }
         animateScore(s.displayScore, newScore)
+        saveCurrentState()
 
         val result = blastLines.detect(newBoard)
         if (result.rows.isNotEmpty() || result.cols.isNotEmpty()) {
             handleBlast(newBoard, newTray, newScore, result, newStats)
         } else {
             setState { copy(comboStreak = 0) }
-            if (newTray.all { it == null }) refreshTray(newBoard, newScore, 0, newStats)
+            if (newTray.all { it == null }) refreshTray(newBoard, currentState.difficulty)
             else checkAndHandleGameOver(newBoard, newTray)
         }
     }
@@ -148,16 +220,13 @@ class GameViewModel(
         val fromBlock = s.trayBlocks.getOrNull(fromIdx) ?: return
         val toBlock = s.trayBlocks.getOrNull(toIdx)
 
-        // Swap blocks between slots
         val newTray = s.trayBlocks.toMutableList()
         newTray[fromIdx] = toBlock
         newTray[toIdx] = fromBlock
 
-        // Play feedback
         sendEvent(GameUiEvent.PlaySound(SoundType.BLOCK_PLACE))
         sendEvent(GameUiEvent.VibrateLight)
 
-        // Update state – no gameplay effect, just slot reorganization
         setState {
             copy(
                 trayBlocks = newTray,
@@ -166,6 +235,7 @@ class GameViewModel(
                 isHighlightValid = true
             )
         }
+        saveCurrentState()
     }
 
     private fun handleBlast(
@@ -176,7 +246,7 @@ class GameViewModel(
         stats:  SessionStats
     ) {
         val newStreak = calcScore.newComboStreak(result, currentState.comboStreak)
-        val blastPts  = calcScore.blastScore(result, newStreak)
+        val blastPts  = calcScore.blastScore(result, newStreak, currentState.difficulty)
         val newScore  = score + blastPts
         val totalLines = result.rows.size + result.cols.size
 
@@ -186,7 +256,6 @@ class GameViewModel(
             bestCombo    = maxOf(stats.bestCombo, calcScore.comboMultiplier(newStreak))
         )
 
-        // Line 1: Combo - showing it even for first blast as requested
         val comboText = if (newStreak >= 2) "Combo $newStreak" else null
         val comboColor = when {
             newStreak >= 8 -> GoldColor
@@ -195,11 +264,9 @@ class GameViewModel(
             else -> BlockTeal
         }
 
-        // Line 2: Points
         val pointsText = "+$blastPts"
         val pointsColor = Color.White
 
-        // Line 3: Commentary based on performance
         val (msgText, msgColor) = when {
             result.isPerfectClear -> "BOARD CLEAR!!" to GoldColor
             result.isCrossBlast   -> "CROSS BLAST!" to BlockMint
@@ -213,7 +280,6 @@ class GameViewModel(
             else                  -> "" to BlockTeal
         }
 
-        // Positioning: average row/col of blasting cells
         val avgRow = if (result.blastingCells.isNotEmpty()) {
             result.blastingCells.map { it.first }.average().toInt().coerceIn(0, BOARD_SIZE - 1)
         } else 3
@@ -262,14 +328,16 @@ class GameViewModel(
                     isNewBestScore = newScore > currentState.bestScore && newScore > 0
                 )
             }
-            if (tray.all { it == null }) refreshTray(clearedBoard, newScore, newStreak, newStats)
+            saveCurrentState()
+            if (tray.all { it == null }) refreshTray(clearedBoard, currentState.difficulty)
             else checkAndHandleGameOver(clearedBoard, tray)
         }
     }
 
-    private fun refreshTray(board: List<List<BoardCell>>, score: Int, streak: Int, stats: SessionStats) {
-        val newTray = spawnBlocks(board, score)
+    private fun refreshTray(board: List<List<BoardCell>>, difficulty: Difficulty) {
+        val newTray = spawnBlocks(board, difficulty)
         setState { copy(trayBlocks = newTray) }
+        saveCurrentState()
         checkAndHandleGameOver(board, newTray)
     }
 
@@ -295,8 +363,9 @@ class GameViewModel(
         if (!currentState.canRevive) { endGame(); return }
         soundManager.play(SoundType.REVIVE)
         val cleared = clearReviveArea(currentState.board)
-        val newTray = spawnBlocks(cleared, currentState.currentScore)
+        val newTray = spawnBlocks(cleared, currentState.difficulty)
         setState { copy(board = cleared, trayBlocks = newTray, phase = GamePhase.Playing, canRevive = true, comboStreak = 0) }
+        saveCurrentState()
     }
 
     private fun clearReviveArea(board: List<List<BoardCell>>): List<List<BoardCell>> {
@@ -314,10 +383,12 @@ class GameViewModel(
         reviveJob?.cancel()
         val s = currentState
         viewModelScope.launch {
+            clearGameState()
             val newBest = maxOf(s.currentScore, s.bestScore)
             if (s.currentScore > 0) {
                 saveScore(ScoreRecord(
                     score = s.currentScore, timestamp = System.currentTimeMillis(),
+                    difficulty = s.difficulty.name,
                     linesBlasted = s.sessionStats.linesBlasted, crossBlasts = s.sessionStats.crossBlasts,
                     bestCombo = s.sessionStats.bestCombo, blocksPlaced = s.sessionStats.blocksPlaced
                 ))

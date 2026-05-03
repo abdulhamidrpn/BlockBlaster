@@ -1,5 +1,7 @@
 package com.rpn.blockblaster.feature.game
 
+import com.rpn.blockblaster.domain.engine.Difficulty
+
 sealed class GameIntent {
     object StartGame                                                   : GameIntent()
     object PauseGame                                                   : GameIntent()

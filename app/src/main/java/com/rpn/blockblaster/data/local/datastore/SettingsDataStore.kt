@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import com.rpn.blockblaster.domain.engine.Difficulty
 import com.rpn.blockblaster.domain.model.AppSettings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -21,6 +22,7 @@ class SettingsDataStore(private val context: Context) {
         val KEY_GRID      = booleanPreferencesKey("show_grid")
         val KEY_ANIM_MS   = intPreferencesKey("anim_speed_ms")
         val KEY_GAMES_PLAYED = intPreferencesKey("games_played")
+        val KEY_DIFFICULTY = stringPreferencesKey("difficulty")
     }
 
     fun getSettings(): Flow<AppSettings> = context.dataStore.data
@@ -33,7 +35,8 @@ class SettingsDataStore(private val context: Context) {
                 isDarkTheme      = prefs[KEY_DARK]      ?: true,
                 showGridLines    = prefs[KEY_GRID]      ?: true,
                 animSpeedMs      = prefs[KEY_ANIM_MS]   ?: 300,
-                gamesPlayed      = prefs[KEY_GAMES_PLAYED] ?: 0
+                gamesPlayed      = prefs[KEY_GAMES_PLAYED] ?: 0,
+                difficulty       = Difficulty.valueOf(prefs[KEY_DIFFICULTY] ?: Difficulty.MEDIUM.name)
             )
         }
 
@@ -46,6 +49,7 @@ class SettingsDataStore(private val context: Context) {
             prefs[KEY_GRID]      = settings.showGridLines
             prefs[KEY_ANIM_MS]   = settings.animSpeedMs
             prefs[KEY_GAMES_PLAYED] = settings.gamesPlayed
+            prefs[KEY_DIFFICULTY] = settings.difficulty.name
         }
     }
 }

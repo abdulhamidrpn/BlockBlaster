@@ -21,6 +21,8 @@ import org.koin.android.ext.android.inject
 import com.rpn.blockblaster.core.play.PlayServicesManager
 import com.rpn.blockblaster.core.play.PlayGamesManager
 
+import androidx.activity.SystemBarStyle
+
 class MainActivity : ComponentActivity() {
 
     private val adManager: AdManager by inject()
@@ -39,7 +41,10 @@ class MainActivity : ComponentActivity() {
         playGamesManager.signInSilently(this)
         playServicesManager.checkForUpdates(this)
         
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.auto(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT)
+        )
         setContent {
             val context = LocalContext.current
             val settingsDataStore = remember { SettingsDataStore(context) }

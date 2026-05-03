@@ -40,6 +40,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,6 +68,7 @@ import com.rpn.blockblaster.feature.game.components.Button3D
 import com.rpn.blockblaster.service.AdManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
@@ -85,6 +87,7 @@ fun GameOverScreen(
     val playServicesManager: PlayServicesManager = koinInject()
     val profile by playGamesManager.profileState.collectAsState()
     val activity = context as? Activity
+    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(finalScore, bestScore) {
         vm.init(finalScore, bestScore)
@@ -239,15 +242,36 @@ fun GameOverScreen(
                             textSize = 15.sp
                         )
                     }
-                    Button3D(
-                        text = "LEADERBOARDS",
-                        onClick = { activity?.let { playGamesManager.showLeaderboard(it) } },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(48.dp),
-                        color = Color(0xFF0F766E),
-                        textSize = 16.sp
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        Button3D(
+                            text = "LEADERBOARDS",
+                            onClick = { activity?.let { playGamesManager.showLeaderboard(it) } },
+                            modifier = Modifier
+                                .weight(1.3f)
+                                .height(48.dp),
+                            color = Color(0xFF0F766E),
+                            textSize = 15.sp
+                        )
+                        Button3D(
+                            text = "RATE APP",
+                            onClick = {
+                                activity?.let {
+                                    coroutineScope.launch {
+                                        playServicesManager.requestInAppReview(it)
+                                        playServicesManager.openPlayStoreForReview()
+                                    }
+                                }
+                            },
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(48.dp),
+                            color = Color(0xFF5B21B6),
+                            textSize = 15.sp
+                        )
+                    }
                 }
             }
 

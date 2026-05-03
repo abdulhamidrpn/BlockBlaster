@@ -1,10 +1,12 @@
 package com.rpn.blockblaster.feature.game
 
+import com.rpn.blockblaster.domain.engine.Difficulty
 import com.rpn.blockblaster.domain.model.*
 
 data class GameState(
     val board:             List<List<BoardCell>> = emptyBoard(),
     val trayBlocks:        List<Block?>          = listOf(null, null, null),
+    val difficulty:        Difficulty            = Difficulty.MEDIUM,
     val currentScore:      Int                   = 0,
     val bestScore:         Int                   = 0,
     val displayScore:      Int                   = 0,

@@ -25,6 +25,8 @@ import androidx.compose.ui.platform.LocalContext
 import com.rpn.blockblaster.core.play.PlayServicesManager
 import kotlinx.coroutines.launch
 
+import com.rpn.blockblaster.domain.engine.Difficulty
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(onBack: () -> Unit) {
@@ -79,6 +81,12 @@ fun SettingsScreen(onBack: () -> Unit) {
                 SettingsToggleRow("Vibration",        s.vibrationEnabled){ vm.onIntent(SettingsIntent.Save(s.copy(vibrationEnabled = it))) }
 
                 Spacer(Modifier.height(8.dp))
+                SettingsSectionHeader("🎮  Game Difficulty")
+                DifficultyRow(current = s.difficulty) { diff ->
+                    vm.onIntent(SettingsIntent.Save(s.copy(difficulty = diff)))
+                }
+
+                Spacer(Modifier.height(8.dp))
                 SettingsSectionHeader("🎨  Display")
                 SettingsToggleRow("Dark Theme",       s.isDarkTheme)     { vm.onIntent(SettingsIntent.Save(s.copy(isDarkTheme = it))) }
                 SettingsToggleRow("Show Grid Lines",  s.showGridLines)   { vm.onIntent(SettingsIntent.Save(s.copy(showGridLines = it))) }
@@ -110,8 +118,9 @@ fun SettingsScreen(onBack: () -> Unit) {
                     coroutineScope.launch {
                         val activity = context as? Activity
                         if (activity != null) {
-                            val success = playServicesManager.requestInAppReview(activity)
-                            if (!success) playServicesManager.openPlayStoreForReview()
+                            playServicesManager.requestInAppReview(activity)
+                            // Always open Play Store after attempt to ensure they can rate if review wasn't shown or finished
+                            playServicesManager.openPlayStoreForReview()
                         }
                     }
                 }
@@ -122,12 +131,49 @@ fun SettingsScreen(onBack: () -> Unit) {
                 Spacer(Modifier.height(16.dp))
                 HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(0.1f))
                 Spacer(Modifier.height(8.dp))
-                Text("Version 1.0.3", fontSize = 13.sp,
+                Text("Version 1.0.5", fontSize = 13.sp,
                     color = MaterialTheme.colorScheme.onSurface.copy(0.4f))
             }
         }
     }
 }
+
+@Composable
+private fun DifficultyRow(current: Difficulty, onSelect: (Difficulty) -> Unit) {
+    val items = listOf(Difficulty.EASY, Difficulty.MEDIUM, Difficulty.HARD)
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(12.dp))
+            .padding(12.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        items.forEach { diff ->
+            val selected = current == diff
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 4.dp)
+                    .background(
+                        if (selected) AccentRed else MaterialTheme.colorScheme.onSurface.copy(0.05f),
+                        RoundedCornerShape(8.dp)
+                    )
+                    .border(
+                        if (selected) 2.dp else 1.dp,
+                        if (selected) AccentRed else MaterialTheme.colorScheme.onSurface.copy(0.1f),
+                        RoundedCornerShape(8.dp)
+                    )
+                    .clickable { onSelect(diff) }
+                    .padding(vertical = 10.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(diff.name, fontSize = 13.sp, fontWeight = if (selected) FontWeight.Black else FontWeight.Bold,
+                    color = if (selected) Color.White else MaterialTheme.colorScheme.onSurface.copy(0.7f))
+            }
+        }
+    }
+}
+
 
 @Composable
 private fun SettingsSectionHeader(title: String) {

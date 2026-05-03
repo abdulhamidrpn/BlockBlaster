@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 val localProperties = Properties()
@@ -19,14 +20,14 @@ fun getSecret(name: String, default: String = ""): String {
 android {
     namespace = "com.rpn.blockblaster"
     compileSdk {
-        version = release(36)
+        version = release(37)
     }
     defaultConfig {
         applicationId = "com.rpn.blockblaster"
         minSdk = 26
-        targetSdk = 36
-        versionCode = 4
-        versionName = "1.0.4"
+        targetSdk = 37
+        versionCode = 6
+        versionName = "1.0.6"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
         manifestPlaceholders["playGamesAppId"] = getSecret("PLAY_GAMES_APP_ID", "")
@@ -96,8 +97,8 @@ dependencies {
 
     implementation(libs.google.fonts)
 
-    implementation("io.coil-kt.coil3:coil-compose:3.4.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.4.0")
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.bundles.kotlin)
     implementation(libs.bundles.ktor)
@@ -109,9 +110,10 @@ dependencies {
     api(libs.koin.core)
 
 
-    implementation("com.google.android.gms:play-services-ads:25.1.0")
-    implementation(platform("com.google.firebase:firebase-bom:34.11.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(libs.play.services.ads)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

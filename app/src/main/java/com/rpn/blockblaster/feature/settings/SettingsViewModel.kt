@@ -26,6 +26,7 @@ class SettingsViewModel(
                 }
             }
             is SettingsIntent.Save -> viewModelScope.launch {
+                setState { copy(settings = intent.settings) }
                 saveSettings(intent.settings)
             }
             is SettingsIntent.ClearBestScore -> { /* handled via repo */ }

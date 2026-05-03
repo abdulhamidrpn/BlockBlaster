@@ -21,7 +21,7 @@ class AdManager(private val context: Context) {
 
 
     fun loadReviveAd() {
-        if (reviveRewardedAd != null) return
+        if (reviveRewardedAd != null || rewardAdUnitId.isBlank()) return
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(context, rewardAdUnitId, adRequest, object : RewardedAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {

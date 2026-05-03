@@ -1,6 +1,7 @@
 package com.rpn.blockblaster.domain.usecase.game
 
 import com.rpn.blockblaster.domain.engine.BlockShapeFactory
+import com.rpn.blockblaster.domain.engine.Difficulty
 import com.rpn.blockblaster.domain.model.Block
 import com.rpn.blockblaster.domain.model.BoardCell
 
@@ -9,7 +10,10 @@ class SpawnBlocksUseCase(private val placeBlockUseCase: PlaceBlockUseCase) {
      * Spawns a set of blocks adaptively based on the board's state and current score.
      * Evaluates empty spaces and enforces that at least some blocks are placeable.
      */
-    operator fun invoke(board: List<List<BoardCell>>, score: Int = 0): List<Block?> {
+    operator fun invoke(
+        board: List<List<BoardCell>>,
+        difficulty: Difficulty = Difficulty.MEDIUM
+    ): List<Block?> {
         val totalCells = board.size * board[0].size
         val emptyCells = board.sumOf { row -> row.count { !it.isFilled } }
         val emptyRatio = emptyCells.toFloat() / totalCells
@@ -19,7 +23,15 @@ class SpawnBlocksUseCase(private val placeBlockUseCase: PlaceBlockUseCase) {
 
         // We try pulling up to 10 distinct random batches to find one where blocks fit well.
         for (attempt in 1..10) {
-            val batch = BlockShapeFactory.spawnBlocks(count = 3, score = score).map { it as Block? }
+            // Adaptive difficulty: if the board is getting full, temporarily lower the difficulty for this spawn
+            val effectiveDifficulty = when {
+                emptyRatio < 0.25f && difficulty == Difficulty.HARD   -> Difficulty.MEDIUM
+                emptyRatio < 0.15f && difficulty == Difficulty.MEDIUM -> Difficulty.EASY
+                emptyRatio < 0.10f -> Difficulty.EASY
+                else -> difficulty
+            }
+
+            val batch = BlockShapeFactory.spawnBlocks(count = 3, difficulty = effectiveDifficulty).map { it as Block? }
             
             // Re-roll to ensure fairness: evaluate how many blocks from this batch can physically be placed
             var fittingCount = 0
@@ -47,7 +59,7 @@ class SpawnBlocksUseCase(private val placeBlockUseCase: PlaceBlockUseCase) {
         }
         
         // Return the best batch we could find (even if 0 fit, meaning natural game over).
-        return bestBatch.ifEmpty { BlockShapeFactory.spawnBlocks(count = 3, score = score).map { it as Block? } }
+        return bestBatch.ifEmpty { BlockShapeFactory.spawnBlocks(count = 3, difficulty = difficulty).map { it as Block? } }
     }
 
     private fun canPlaceAnywhere(board: List<List<BoardCell>>, block: Block): Boolean {

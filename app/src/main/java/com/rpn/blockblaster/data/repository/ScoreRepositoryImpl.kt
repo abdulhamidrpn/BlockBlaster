@@ -11,6 +11,7 @@ class ScoreRepositoryImpl(private val dao: ScoreDao) : ScoreRepository {
         dao.insert(ScoreEntity(
             score        = record.score,
             timestamp    = record.timestamp,
+            difficulty   = record.difficulty,
             linesBlasted = record.linesBlasted,
             crossBlasts  = record.crossBlasts,
             bestCombo    = record.bestCombo,
@@ -18,14 +19,15 @@ class ScoreRepositoryImpl(private val dao: ScoreDao) : ScoreRepository {
         ))
     }
 
-    override suspend fun getBestScore(): Int = dao.getBestScore() ?: 0
+    override suspend fun getBestScore(difficulty: String): Int = dao.getBestScore(difficulty) ?: 0
 
-    override suspend fun getTopScores(): List<ScoreRecord> =
-        dao.getTopScores().map {
+    override suspend fun getTopScores(difficulty: String): List<ScoreRecord> =
+        dao.getTopScores(difficulty).map {
             ScoreRecord(
                 id           = it.id,
                 score        = it.score,
                 timestamp    = it.timestamp,
+                difficulty   = it.difficulty,
                 linesBlasted = it.linesBlasted,
                 crossBlasts  = it.crossBlasts,
                 bestCombo    = it.bestCombo,

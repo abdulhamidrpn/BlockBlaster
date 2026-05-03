@@ -103,35 +103,46 @@ class PlayGamesManager(private val context: Context) {
                 Timber.d("PlayGamesManager: Player fetched: ${player?.displayName}")
                 
                 // Now fetch leaderboard score
-                PlayGames.getLeaderboardsClient(activity).loadCurrentPlayerLeaderboardScore(
-                    LEADERBOARD_HIGH_SCORE_ID,
-                    LeaderboardVariant.TIME_SPAN_ALL_TIME,
-                    LeaderboardVariant.COLLECTION_PUBLIC
-                ).addOnCompleteListener { rankTask ->
-                    var rankStr: String? = null
-                    var scoreStr: String? = null
-                    var rawScore: Long? = null
+                if (LEADERBOARD_HIGH_SCORE_ID.isNotBlank()) {
+                    PlayGames.getLeaderboardsClient(activity).loadCurrentPlayerLeaderboardScore(
+                        LEADERBOARD_HIGH_SCORE_ID,
+                        LeaderboardVariant.TIME_SPAN_ALL_TIME,
+                        LeaderboardVariant.COLLECTION_PUBLIC
+                    ).addOnCompleteListener { rankTask ->
+                        var rankStr: String? = null
+                        var scoreStr: String? = null
+                        var rawScore: Long? = null
 
-                    if (rankTask.isSuccessful) {
-                        val leaderboardScore = rankTask.result?.get()
-                        if (leaderboardScore != null) {
-                            rankStr = leaderboardScore.displayRank
-                            scoreStr = leaderboardScore.displayScore
-                            rawScore = leaderboardScore.rawScore
-                            Timber.d("PlayGamesManager: Leaderboard rank found! Rank: $rankStr Score: $scoreStr")
+                        if (rankTask.isSuccessful) {
+                            val leaderboardScore = rankTask.result?.get()
+                            if (leaderboardScore != null) {
+                                rankStr = leaderboardScore.displayRank
+                                scoreStr = leaderboardScore.displayScore
+                                rawScore = leaderboardScore.rawScore
+                                Timber.d("PlayGamesManager: Leaderboard rank found! Rank: $rankStr Score: $scoreStr")
+                            } else {
+                                Timber.w("PlayGamesManager: Player hasn't posted a score to the leaderboard yet.")
+                            }
                         } else {
-                            Timber.w("PlayGamesManager: Player hasn't posted a score to the leaderboard yet.")
+                            Timber.e(rankTask.exception, "PlayGamesManager: Error fetching player leaderboard rank.")
                         }
-                    } else {
-                        Timber.e(rankTask.exception, "PlayGamesManager: Error fetching player leaderboard rank.")
-                    }
 
+                        _profileState.value = PlayGamesProfile(
+                            displayName = player?.displayName ?: "Unknown Player",
+                            avatarUrl = player?.hiResImageUrl ?: player?.iconImageUrl,
+                            rank = rankStr,
+                            score = scoreStr,
+                            rawScore = rawScore
+                        )
+                    }
+                } else {
+                    Timber.w("PlayGamesManager: Leaderboard ID is blank. Skipping score fetch.")
                     _profileState.value = PlayGamesProfile(
                         displayName = player?.displayName ?: "Unknown Player",
                         avatarUrl = player?.hiResImageUrl ?: player?.iconImageUrl,
-                        rank = rankStr,
-                        score = scoreStr,
-                        rawScore = rawScore
+                        rank = null,
+                        score = null,
+                        rawScore = null
                     )
                 }
 
@@ -148,6 +159,11 @@ class PlayGamesManager(private val context: Context) {
             return
         }
 
+        if (LEADERBOARD_HIGH_SCORE_ID.isBlank()) {
+            Timber.e("PlayGamesManager: Leaderboard ID is missing.")
+            return
+        }
+
         Timber.d("PlayGamesManager: Launching native leaderboard UI intent.")
         PlayGames.getLeaderboardsClient(activity)
             .getLeaderboardIntent(LEADERBOARD_HIGH_SCORE_ID)
@@ -160,7 +176,7 @@ class PlayGamesManager(private val context: Context) {
     }
 
     fun submitScore(activity: Activity, score: Int) {
-        if (!isAuthenticated) return
+        if (!isAuthenticated || LEADERBOARD_HIGH_SCORE_ID.isBlank()) return
         PlayGames.getLeaderboardsClient(activity)
             .submitScore(LEADERBOARD_HIGH_SCORE_ID, score.toLong())
         Timber.d("PlayGamesManager: Handed off Score $score to Play Services Leaderboard API.")

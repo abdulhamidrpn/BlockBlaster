@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.BlockBlaster" parent="android:Theme.Material.Light.NoActionBar.Fullscreen" />
+    <style name="Theme.BlockBlaster" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowLayoutInDisplayCutoutMode" xmlns:tools="http://schemas.android.com/tools" tools:targetApi="o_mr1">shortEdges</item>
+    </style>
 
      <style name="Theme.BlockBlaster.Splash" parent="Theme.SplashScreen">
            <item name="windowSplashScreenBackground">#1A1A2E</item>
